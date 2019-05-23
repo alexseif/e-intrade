@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Themes - Twenty Nineteen package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-01-24 14:16:16+0000\n"
+"PO-Revision-Date: 2019-05-10 13:06:00+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,10 +24,6 @@ msgstr "Twenty Nineteen"
 msgid "<span class=\"meta-nav\">Published in</span><span class=\"post-title\">%s</span>"
 msgstr "<span class=\"meta-nav\">Δημοσιευμένο</span><span class=\"post-title\">%s</span>"
 
-#: inc/template-functions.php:209
-msgid "More"
-msgstr "Περισσότερα"
-
 #: image.php:87
 msgctxt "Parent post link"
 msgid "<span class=\"meta-nav\">Published in</span><br><span class=\"post-title\">%title</span>"
@@ -47,6 +43,10 @@ msgstr "Το Twenty Nineteen απαιτεί τουλάχιστον έκδοση 
 msgid "Back"
 msgstr "Επιστροφή"
 
+#: inc/template-functions.php:209
+msgid "More"
+msgstr "Περισσότερα"
+
 #: inc/customizer.php:98
 msgid "Apply a filter to featured images using the primary color"
 msgstr "Εφαρμόστε ένα φίλτρο στις προβεβλημένες εικόνες χρησιμοποιώντας το πρωτεύον χρώμα"
@@ -54,6 +54,16 @@ msgstr "Εφαρμόστε ένα φίλτρο στις προβεβλημένε
 #: inc/customizer.php:78
 msgid "Apply a custom color for buttons, links, featured images, etc."
 msgstr "Εφαρμόστε ένα προσαρμοσμένο χρώμα σε κουμπιά, συνδέσμους, προβεβλημένες εικόνες, κλπ."
+
+#: inc/customizer.php:56
+msgctxt "primary color"
+msgid "Custom"
+msgstr "Προσαρμοσμένo"
+
+#: inc/customizer.php:55
+msgctxt "primary color"
+msgid "Default"
+msgstr "Προεπιλεγμένo"
 
 #: functions.php:166
 msgid "White"
@@ -107,16 +117,6 @@ msgstr "S"
 msgid "Footer Menu"
 msgstr "Μενού υποσέλιδου"
 
-#: inc/customizer.php:56
-msgctxt "primary color"
-msgid "Custom"
-msgstr "Προσαρμοσμένo"
-
-#: inc/customizer.php:55
-msgctxt "primary color"
-msgid "Default"
-msgstr "Προεπιλεγμένo"
-
 #: image.php:70
 msgctxt "Used before full size attachment link."
 msgid "Full size"
@@ -138,80 +138,6 @@ msgstr "Υποσέλιδο"
 msgid "Primary Color"
 msgstr "Βασικό χρώμα"
 
-#: template-parts/content/content-none.php:39
-msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
-msgstr "Λυπούμαστε, αλλά τίποτα δε βρέθηκε που ταιριάζει στους όρους αναζήτησης. Παρακαλώ προσπαθήστε ξανά με άλλες λέξεις κλειδιά."
-
-#: template-parts/content/content-none.php:16
-msgid "Nothing Found"
-msgstr "Δε βρέθηκε τίποτα"
-
-#: comments.php:95
-msgid "Previous"
-msgstr "Προηγούμενη"
-
-#: comments.php:96
-msgid "Next"
-msgstr "Επόμενο"
-
-#: image.php:52 template-parts/content/content-page.php:27
-#: template-parts/content/content.php:49
-#: template-parts/content/content-single.php:40
-msgid "Pages:"
-msgstr "Σελίδες:"
-
-#: header.php:24
-msgid "Skip to content"
-msgstr "Μετάβαση στο περιεχόμενο"
-
-#: functions.php:61 template-parts/header/site-branding.php:46
-msgid "Social Links Menu"
-msgstr "Μενού Συνδέσμων Κοινωνικών Δικτύων"
-
-#: comments.php:116
-msgid "Comments are closed."
-msgstr "Τα σχόλια είναι απενεργοποιημένα."
-
-#: 404.php:20
-msgid "Oops! That page can&rsquo;t be found."
-msgstr "Ωπα! Αυτή η σελίδα δε βρέθηκε."
-
-#: 404.php:24
-msgid "It looks like nothing was found at this location. Maybe try a search?"
-msgstr "Φαίνεται ότι δε βρέθηκε τίποτα σε αυτή την τοποθεσία. Μήπως να δοκιμάζατε μια αναζήτηση;"
-
-#: template-parts/content/content-none.php:46
-msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
-msgstr "Φαίνεται ότι δε βρήκαμε αυτό που ζητούσατε. Αν θέλετε, δοκιμάστε την αναζήτηση."
-
-#. translators: used between list items, there is a space after the comma.
-#: inc/template-tags.php:86 inc/template-tags.php:98
-msgid ", "
-msgstr ", "
-
-#. translators: %s: Name of current post. Only visible to screen readers
-#: template-parts/content/content.php:36
-#: template-parts/content/content-single.php:27
-msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
-msgstr "Συνεχίστε την ανάγνωση του<span class=\"screen-reader-text\"> \"%s\"</span>"
-
-#: single.php:38
-msgid "Next Post"
-msgstr "Επόμενο άρθρο"
-
-#: single.php:41
-msgid "Previous Post"
-msgstr "Προηγούμενο άρθρο"
-
-#: template-parts/header/site-branding.php:33
-msgid "Top Menu"
-msgstr "Αρχικό μενού"
-
-#. translators: %s: WordPress.
-#: footer.php:28
-msgid "Proudly powered by %s."
-msgstr "Με την υποστήριξη του %s."
-
 #: template-parts/post/discussion-meta.php:18
 msgid "No comments"
 msgstr "Δεν υπάρχουν σχόλια"
@@ -232,18 +158,54 @@ msgstr "Δείτε περισσότερα άρθρα"
 msgid "Published by %s"
 msgstr "Δημοσιεύθηκε από %s"
 
+#: template-parts/header/site-branding.php:33
+msgid "Top Menu"
+msgstr "Αρχικό μενού"
+
+#. translators: %s: Name of current post. Only visible to screen readers
+#: template-parts/content/content.php:36
+#: template-parts/content/content-single.php:27
+msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr "Συνεχίστε την ανάγνωση του<span class=\"screen-reader-text\"> \"%s\"</span>"
+
+#: image.php:52 template-parts/content/content-page.php:27
+#: template-parts/content/content.php:49
+#: template-parts/content/content-single.php:40
+msgid "Pages:"
+msgstr "Σελίδες:"
+
+#: template-parts/content/content-none.php:46
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "Φαίνεται ότι δε βρήκαμε αυτό που ζητούσατε. Αν θέλετε, δοκιμάστε την αναζήτηση."
+
+#: template-parts/content/content-none.php:39
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "Λυπούμαστε, αλλά τίποτα δε βρέθηκε που ταιριάζει στους όρους αναζήτησης. Παρακαλώ προσπαθήστε ξανά με άλλες λέξεις κλειδιά."
+
 #. translators: 1: link to WP admin new post page.
 #: template-parts/content/content-none.php:26
 msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
 msgstr "Έτοιμοι για την πρώτη σας δημοσίευση; <a href=\"%1$s\">Πάμε</a>."
 
+#: template-parts/content/content-none.php:16
+msgid "Nothing Found"
+msgstr "Δε βρέθηκε τίποτα"
+
 #: single.php:42
 msgid "Previous post:"
 msgstr "Προηγούμενο άρθρο:"
 
+#: single.php:41
+msgid "Previous Post"
+msgstr "Προηγούμενο άρθρο"
+
 #: single.php:39
 msgid "Next post:"
 msgstr "Επόμενο άρθρο:"
+
+#: single.php:38
+msgid "Next Post"
+msgstr "Επόμενο άρθρο"
 
 #: search.php:22
 msgid "Search results for:"
@@ -264,6 +226,11 @@ msgstr "Ετικέτες:"
 #: inc/template-tags.php:92
 msgid "Posted in"
 msgstr "Αναρτήθηκε σε"
+
+#. translators: used between list items, there is a space after the comma.
+#: inc/template-tags.php:86 inc/template-tags.php:98
+msgid ", "
+msgstr ", "
 
 #. translators: %s: Name of current post. Only visible to screen readers.
 #: inc/template-tags.php:63
@@ -328,9 +295,34 @@ msgstr "Αρχεία Κατηγοριών: "
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr "Επεξεργασία του<span class=\"screen-reader-text\"> \"%s\"</span>"
 
+#: header.php:25
+msgid "Skip to content"
+msgstr "Μετάβαση στο περιεχόμενο"
+
+#: functions.php:61 template-parts/header/site-branding.php:46
+msgid "Social Links Menu"
+msgstr "Μενού Συνδέσμων Κοινωνικών Δικτύων"
+
 #: functions.php:59 functions.php:146
 msgid "Primary"
 msgstr "Κύριο"
+
+#. translators: %s: WordPress.
+#: footer.php:28
+msgid "Proudly powered by %s."
+msgstr "Με την υποστήριξη του %s."
+
+#: comments.php:116
+msgid "Comments are closed."
+msgstr "Τα σχόλια είναι απενεργοποιημένα."
+
+#: comments.php:96
+msgid "Next"
+msgstr "Επόμενο"
+
+#: comments.php:95
+msgid "Previous"
+msgstr "Προηγούμενη"
 
 #: comments.php:92 comments.php:95 comments.php:96
 msgid "Comments"
@@ -358,32 +350,40 @@ msgstr "Σχολίασε"
 msgid "Join the Conversation"
 msgstr "Συμμετάσχετε στη συζήτηση"
 
-#: classes/class-twentynineteen-walker-comment.php:100
+#: classes/class-twentynineteen-walker-comment.php:99
 msgid "Your comment is awaiting moderation."
 msgstr "Το σχόλιό σας περιμένει έγκριση."
 
-#: classes/class-twentynineteen-walker-comment.php:95
+#: classes/class-twentynineteen-walker-comment.php:94
 msgid "Edit"
 msgstr "Επεξεργασία"
 
 #. translators: 1: comment date, 2: comment time
-#: classes/class-twentynineteen-walker-comment.php:87
+#: classes/class-twentynineteen-walker-comment.php:86
 msgid "%1$s at %2$s"
 msgstr "%1$s την %2$s"
 
-#: classes/class-twentynineteen-walker-comment.php:67
+#: classes/class-twentynineteen-walker-comment.php:66
 msgid "%s <span class=\"screen-reader-text says\">says:</span>"
 msgstr "%s <span class=\"screen-reader-text says\">λέει:</span>"
 
-#. Author URI of the theme
-#: footer.php:25
-msgid "https://wordpress.org/"
-msgstr "https://wordpress.org/"
+#: 404.php:24
+msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgstr "Φαίνεται ότι δε βρέθηκε τίποτα σε αυτή την τοποθεσία. Μήπως να δοκιμάζατε μια αναζήτηση;"
+
+#: 404.php:20
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "Ωπα! Αυτή η σελίδα δε βρέθηκε."
+
+#. Theme URI of the theme
+msgid "https://wordpress.org/themes/twentynineteen/"
+msgstr "https://el.wordpress.org/themes/twentynineteen/"
 
 #. Author of the theme
 msgid "the WordPress team"
 msgstr "η Ομάδα του WordPress"
 
-#. Theme URI of the theme
-msgid "https://github.com/WordPress/twentynineteen"
-msgstr "https://github.com/WordPress/twentynineteen"
+#. Author URI of the theme
+#: footer.php:25
+msgid "https://wordpress.org/"
+msgstr "https://wordpress.org/"

@@ -337,17 +337,19 @@ class Cf7_Grid_Layout_Admin {
     if(class_exists('WPCF7_ContactForm') &&  $post_type === WPCF7_ContactForm::post_type  ) {
       //debug_msg($args, 'pre-args');
       $system_dropdowns = get_option('_cf7sg_dynamic_dropdown_system_taxonomy',array());
-      $system_taxonomy = array();
+      /** @since 2.8.3 add wpcf7_type (registered in assets/cf7-table.php) taxonomy to cf7 post type */
+      $system_taxonomy = array('wpcf7_type');
       if(!empty($system_dropdowns)){
         foreach($system_dropdowns as $id=>$list){
           $system_taxonomy = array_merge($system_taxonomy, $list);
         }
-        if(!empty($args['taxonomies'])){
-          $system_taxonomy = array_merge($args['taxonomies'], $system_taxonomy);
-        }
-        $system_taxonomy = array_unique($system_taxonomy);
-        $args['taxonomies'] = $system_taxonomy;
       }
+      if(!empty($args['taxonomies'])){
+        $system_taxonomy = array_merge($args['taxonomies'], $system_taxonomy);
+        $system_taxonomy = array_unique($system_taxonomy);
+      }
+      $args['taxonomies'] = $system_taxonomy;
+
       $args['public'] = false;
       $args['show_ui']= true;
       $args['show_in_menu']= 'wpcf7';
@@ -568,8 +570,20 @@ class Cf7_Grid_Layout_Admin {
   	$args['locale'] = isset( $_POST['wpcf7-locale'] ) ? sanitize_text_field($_POST['wpcf7-locale']) : null;
   	$args['form'] = '';
     $allowed_tags = wp_kses_allowed_html( 'post' ); //filtered in function below.
+    /** @since 2.10.0 alllow custom input html*/
+    $allowed_tags['input']=array( //add additional input html elements
+      'type'=>1,
+      'class'=>1,
+      'id'=>1,
+      'value'=>1,
+      'data-*'=>1,
+    );
+    $allowed_tags['script']=array('type'=>1);
+    $allowed_tags = apply_filters('cf7sg_kses_allowed_html',$allowed_tags, $_POST['post_name']);
+    debug_msg($_POST['wpcf7-form'], 'admin form ');
     if(isset( $_POST['wpcf7-form'] )){
       $args['form'] = wp_kses($_POST['wpcf7-form'], $allowed_tags);
+      debug_msg($args['form'], 'saved form ');
     }
   	$args['mail'] = isset( $_POST['wpcf7-mail'] ) ? wpcf7_sanitize_mail( $_POST['wpcf7-mail'] ): array();
   	$args['mail_2'] = isset( $_POST['wpcf7-mail-2'] ) ? wpcf7_sanitize_mail( $_POST['wpcf7-mail-2'] ): array();

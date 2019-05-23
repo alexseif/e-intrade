@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Polylang - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-02-04 21:26:30+0000\n"
+"PO-Revision-Date: 2019-04-23 06:57:37+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1744,10 +1744,6 @@ msgstr "Übersetzungen aktualisiert."
 msgid "The chosen static front page must be translated in all languages."
 msgstr "Die gewählte statische Startseite muss in alle Sprachen übersetzt werden."
 
-#: include/switcher.php:27
-msgid "Hides languages with no translation"
-msgstr "Sprachen ohne Übersetzung werden nicht angezeit"
-
 #: settings/settings-licenses.php:198 settings/settings-module.php:176
 msgid "Settings saved."
 msgstr "Einstellungen gespeichert."
@@ -1935,3 +1931,7 @@ msgstr "Bitte aktualisiere zuerst auf %1$s bevor du auf %2$s aktualisierst."
 #: settings/view-about.php:15
 msgid "Polylang is provided with an extensive %1$sdocumentation%2$s (in English only). It includes information on how to set up your multilingual site and use it on a daily basis, a FAQ, as well as a documentation for developers to adapt their plugins and themes."
 msgstr "Polylang wird mit einer ausführlichen %1$sDokumentation%2$s ausgeliefert (nur auf Englisch). Sie beinhaltet Informationen, wie eine mehrsprachige Website eingerichtet wird, wie man diese im täglichen Gebrauch benutzt, eine FAQ und eine Dokumentation für Entwickler, um ihre Plugins und Themes anpassen zu können."
+
+#: include/switcher.php:27
+msgid "Hides languages with no translation"
+msgstr "Sprachen ohne Übersetzung werden nicht angezeigt"

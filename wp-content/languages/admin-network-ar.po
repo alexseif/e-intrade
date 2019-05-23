@@ -1,5 +1,5 @@
-# Translation of WordPress - 5.1.x - Development - Administration - Network Admin in Arabic
-# This file is distributed under the same license as the WordPress - 5.1.x - Development - Administration - Network Admin package.
+# Translation of WordPress - 5.2.x - Development - Administration - Network Admin in Arabic
+# This file is distributed under the same license as the WordPress - 5.2.x - Development - Administration - Network Admin package.
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2019-01-28 09:25:26+0000\n"
@@ -9,7 +9,7 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: ar\n"
-"Project-Id-Version: WordPress - 5.1.x - Development - Administration - Network Admin\n"
+"Project-Id-Version: WordPress - 5.2.x - Development - Administration - Network Admin\n"
 
 #. translators: %s: DO_NOT_UPGRADE_GLOBAL_TABLES
 #: wp-admin/includes/network.php:113
@@ -44,10 +44,6 @@ msgstr "تنصيب باستعمال المسارات الفرعية"
 #: wp-admin/includes/class-wp-ms-themes-list-table.php:671
 msgid "Active Child Theme"
 msgstr "القالب الابن المفعّل"
-
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:666
-msgid "Active Theme"
-msgstr "القالب النشط"
 
 #: wp-admin/network/site-info.php:192
 msgid "Attributes"
@@ -193,12 +189,12 @@ msgstr "يرجى التأكد من أن وحدة الأباتشي %s مُثبت�
 msgid "You cannot use port numbers such as %s."
 msgstr "لا يمكنك استخدام أرقام المنافذ كـ %s."
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:173
+#: wp-admin/includes/class-wp-ms-users-list-table.php:171
 msgctxt "user"
 msgid "Registered"
 msgstr "تاريخ التسجيل"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:144
+#: wp-admin/includes/class-wp-ms-users-list-table.php:142
 msgid "Super Admin <span class=\"count\">(%s)</span>"
 msgid_plural "Super Admins <span class=\"count\">(%s)</span>"
 msgstr[0] "مدير عام <span class=\"count\">(%s)</span>"
@@ -208,12 +204,12 @@ msgstr[3] "مدير عام <span class=\"count\">(%s)</span>"
 msgstr[4] "مدير عام <span class=\"count\">(%s)</span>"
 msgstr[5] "مدير عام <span class=\"count\">(%s)</span>"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:118
+#: wp-admin/includes/class-wp-ms-users-list-table.php:116
 msgctxt "user"
 msgid "Not Spam"
 msgstr "غير مزعج"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:117
+#: wp-admin/includes/class-wp-ms-users-list-table.php:115
 msgctxt "user"
 msgid "Mark as Spam"
 msgstr "مزعج"
@@ -953,6 +949,10 @@ msgstr "ستحتاج السجل Wildcard DNS إن كنت تنوي استخدام
 #: wp-admin/includes/network.php:137
 msgid "You cannot install a network of sites with your server address."
 msgstr "لا يمكنك تثبيت شبكة مواقع باستخدام عنوان الخادم الخاص بك."
+
+#: wp-admin/includes/network.php:189
+msgid "Note:"
+msgstr "ملاحظة:"
 
 #: wp-admin/includes/network.php:177
 msgid "Fill in the information below and you&#8217;ll be on your way to creating a network of WordPress sites. We will create configuration files in the next step."

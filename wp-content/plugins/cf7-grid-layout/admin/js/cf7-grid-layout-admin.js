@@ -184,6 +184,7 @@
         });
       }else{
         //set the first textarea as our default tag consumer
+        $('textarea#wpcf7-form').attr('id','');
         $textareaSelected = $('textarea', $grid).first();
         $textareaSelected.attr('id', 'wpcf7-form');
       }
@@ -195,6 +196,7 @@
           $textareaSelected.html($textareaSelected.val()); //set its inner html
         }
         if($this.is('.grid-input')){
+          $('textarea#wpcf7-form').attr('id','');
           $textareaSelected = $this.attr('id','wpcf7-form');
         }
       });
@@ -423,6 +425,7 @@
               text = text.replace(/\{\$form_key\}/gi, key);
               text = text.replace(/\{\$field_name\}/gi, field);
               text = text.replace(/\{\$field_name_slug\}/gi, field.replace('-','_'));
+              text = text.replace(/\{\$field_type\}/gi, tag);
               return text;
             }
           });
@@ -731,6 +734,7 @@
     var $input = $(':input', $this).show();
     $input.focus();
     if($input.is('textarea')){
+      $('textarea#wpcf7-form').attr('id','');
       $input.attr('id', 'wpcf7-form');
       wpcf7Value = $input.val();
     }else{

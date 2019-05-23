@@ -1,5 +1,5 @@
 <?php exit; ?>{
-    "version": "0.9.7.3",
+    "version": "0.9.7.4",
     "cluster.messagebus.debug": false,
     "cluster.messagebus.enabled": false,
     "cluster.messagebus.sns.region": "",
@@ -60,7 +60,7 @@
         "\\bw3tc_request_data\\b"
     ],
     "objectcache.configuration_overloaded": false,
-    "objectcache.enabled": "1",
+    "objectcache.enabled": "0",
     "objectcache.debug": "0",
     "objectcache.enabled_for_wp_admin": true,
     "objectcache.fallback_transients": true,
@@ -483,9 +483,9 @@
         "{plugins_dir}\/wp-fb-autoconnect\/facebook-platform\/channel.html"
     ],
     "cdn.reject.ssl": false,
-    "cdnfsd.enabled": "1",
+    "cdnfsd.enabled": "0",
     "cdnfsd.engine": "",
-    "cdnfsd.debug": false,
+    "cdnfsd.debug": "0",
     "cdnfsd.cloudfront.access_key": "",
     "cdnfsd.cloudfront.secret_key": "",
     "cdnfsd.cloudfront.distribution_id": "",

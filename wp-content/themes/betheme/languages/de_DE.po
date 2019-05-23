@@ -10751,7 +10751,7 @@ msgstr ""
 
 #: /Applications/XAMPP/xamppfiles/htdocs/betheme/woocommerce/single-product/tabs/additional-information.php:25
 msgid "Additional information"
-msgstr "zusätzliche Informationen"
+msgstr ""
 
 #: /Applications/XAMPP/xamppfiles/htdocs/betheme/woocommerce/single-product/tabs/description.php:25
 msgid "Product Description"

@@ -40,6 +40,7 @@
 
 <!-- wp_head() -->
 <?php wp_head(); ?>
+<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/bc90e220ca3341a878010322b/bb9d9d16010dec7dd2b3eb873.js");</script>
 </head>
 
 <!-- body -->
