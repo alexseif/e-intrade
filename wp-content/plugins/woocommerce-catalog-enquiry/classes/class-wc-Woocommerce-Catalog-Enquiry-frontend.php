@@ -48,6 +48,8 @@ class WC_Woocommerce_Catalog_Enquiry_Frontend {
                 }
             }
         }
+        // Enquiry button shortcode
+        add_shortcode('wce_enquiry_button', array($this, 'wce_enquiry_button_shortcode'));
     }
 
     public function redirect_cart_checkout_on_conditions() {
@@ -1042,6 +1044,24 @@ class WC_Woocommerce_Catalog_Enquiry_Frontend {
             }
             if (isset($settings['custom_css_product_page']) && $settings['custom_css_product_page'] != "") {
                 wp_add_inline_style('wce_frontend_css', $settings['custom_css_product_page']);
+            }
+        }
+    }
+    
+    public function wce_enquiry_button_shortcode(){
+        global $WC_Woocommerce_Catalog_Enquiry;
+        $settings = $WC_Woocommerce_Catalog_Enquiry->options;
+
+        if (isset($settings['is_enable']) && $settings['is_enable'] == "Enable" && ($this->available_for == '' || $this->available_for == 0)) {
+            if (isset($settings['is_enable_enquiry']) && $settings['is_enable_enquiry'] == "Enable") {
+                $piority = apply_filters('wc_catalog_enquiry_button_possition_piority', 100);
+                if (isset($settings['is_disable_popup']) && $settings['is_disable_popup'] == "Enable") {
+                    remove_action('woocommerce_single_product_summary', array($this, 'add_form_for_enquiry_without_popup'), $piority);
+                    $this->add_form_for_enquiry_without_popup();
+                } else {
+                    remove_action('woocommerce_single_product_summary', array($this, 'add_form_for_enquiry'), $piority);
+                    $this->add_form_for_enquiry();
+                }
             }
         }
     }
