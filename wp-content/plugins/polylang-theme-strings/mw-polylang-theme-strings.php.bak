@@ -86,10 +86,8 @@
         }
 
         private function Plugin_Install_Hooks_Init(){
-//            register_activation_hook($this->Path_Get('plugin_file_index'), array($this, 'Install'));
- //           register_uninstall_hook($this->Path_Get('plugin_file_index'), array($this, 'Uninstall'));
-	    register_activation_hook($this->Path_Get('plugin_file_index'), 'Install');
-	    register_uninstall_hook($this->Path_Get('plugin_file_index'), 'Uninstall');
+            register_activation_hook($this->Path_Get('plugin_file_index'), array($this, 'Install'));
+            register_uninstall_hook($this->Path_Get('plugin_file_index'), array($this, 'Uninstall'));
             add_action('upgrader_process_complete', array($this, 'Plugin_Upgrade'), 10, 2);
         }
 
