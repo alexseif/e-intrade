@@ -51,6 +51,7 @@ class WPCOM_JSON_API_GET_Site_Endpoint extends WPCOM_JSON_API_Endpoint {
 		'meta'              => '(object) Meta data',
 		'quota'             => '(array) An array describing how much space a user has left for uploads',
 		'launch_status'     => '(string) A string describing the launch status of a site',
+		'is_fse_active'     => '(bool) If the site has Full Site Editing active or not.',
 	);
 
 	protected static $no_member_fields = array(
@@ -70,6 +71,7 @@ class WPCOM_JSON_API_GET_Site_Endpoint extends WPCOM_JSON_API_Endpoint {
 		'is_following',
 		'meta',
 		'launch_status',
+		'is_fse_active',
 	);
 
 	protected static $site_options_format = array(
@@ -131,6 +133,7 @@ class WPCOM_JSON_API_GET_Site_Endpoint extends WPCOM_JSON_API_Endpoint {
 		'design_type',
 		'site_goals',
 		'site_segment',
+		'import_engine',
 	);
 
 	protected static $jetpack_response_field_additions = array(
@@ -153,6 +156,10 @@ class WPCOM_JSON_API_GET_Site_Endpoint extends WPCOM_JSON_API_Endpoint {
 		'jetpack_frame_nonce',
 		'design_type',
 		'wordads',
+		// Use the site registered date from wpcom, since it is only available in a multisite context
+		// and defaults to `0000-00-00T00:00:00+00:00` from the Jetpack site.
+		// See https://github.com/Automattic/jetpack/blob/58638f46094b36f5df9cbc4570006544f0ad300c/sal/class.json-api-site-base.php#L387.
+		'created_at',
 	);
 
 	private $site;
@@ -373,6 +380,9 @@ class WPCOM_JSON_API_GET_Site_Endpoint extends WPCOM_JSON_API_Endpoint {
 			case 'launch_status' :
 				$response[ $key ] = $this->site->get_launch_status();
 				break;
+			case 'is_fse_active':
+				$response[ $key ] = $this->site->is_fse_active();
+				break;
 		}
 
 		do_action( 'post_render_site_response_key', $key );
@@ -575,6 +585,9 @@ class WPCOM_JSON_API_GET_Site_Endpoint extends WPCOM_JSON_API_Endpoint {
 					break;
 				case 'site_segment':
 					$options[ $key ] = $site->get_site_segment();
+					break;
+				case 'import_engine':
+					$options[ $key ] = $site->get_import_engine();
 					break;
 			}
 		}

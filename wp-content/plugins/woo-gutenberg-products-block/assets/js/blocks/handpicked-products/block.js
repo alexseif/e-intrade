@@ -15,9 +15,11 @@ import {
 	RangeControl,
 	Toolbar,
 	withSpokenMessages,
+	ToggleControl,
 } from '@wordpress/components';
 import { Component, Fragment } from '@wordpress/element';
 import PropTypes from 'prop-types';
+import { MAX_COLUMNS, MIN_COLUMNS } from '@woocommerce/block-settings';
 
 /**
  * Internal dependencies
@@ -33,7 +35,7 @@ import ProductOrderbyControl from '../../components/product-orderby-control';
 class ProductsBlock extends Component {
 	getInspectorControls() {
 		const { attributes, setAttributes } = this.props;
-		const { columns, contentVisibility, orderby } = attributes;
+		const { columns, contentVisibility, orderby, alignButtons } = attributes;
 
 		return (
 			<InspectorControls key="inspector">
@@ -45,8 +47,24 @@ class ProductsBlock extends Component {
 						label={ __( 'Columns', 'woo-gutenberg-products-block' ) }
 						value={ columns }
 						onChange={ ( value ) => setAttributes( { columns: value } ) }
-						min={ wc_product_block_data.min_columns }
-						max={ wc_product_block_data.max_columns }
+						min={ MIN_COLUMNS }
+						max={ MAX_COLUMNS }
+					/>
+					<ToggleControl
+						label={ __( 'Align Add to Cart buttons', 'woo-gutenberg-products-block' ) }
+						help={
+							alignButtons ?
+								__(
+									'Buttons are aligned vertically.',
+									'woo-gutenberg-products-block'
+								) :
+								__(
+									'Buttons follow content.',
+									'woo-gutenberg-products-block'
+								)
+						}
+						checked={ alignButtons }
+						onChange={ () => setAttributes( { alignButtons: ! alignButtons } ) }
 					/>
 				</PanelBody>
 				<PanelBody
@@ -102,7 +120,7 @@ class ProductsBlock extends Component {
 				className="wc-block-products-grid wc-block-handpicked-products"
 			>
 				{ __(
-					'Display a selection of hand-picked products in a grid',
+					'Display a selection of hand-picked products in a grid.',
 					'woo-gutenberg-products-block'
 				) }
 				<div className="wc-block-handpicked-products__selection">

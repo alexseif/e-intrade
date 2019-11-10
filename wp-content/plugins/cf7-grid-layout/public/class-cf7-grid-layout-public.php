@@ -1096,8 +1096,11 @@ class Cf7_Grid_Layout_Public {
           }
           break;
         default:
-          if(!isset($data[$tag['name']])) continue; /*likely toggled and unused*/
-          $result = apply_filters( "wpcf7_validate_{$type}", $result, $tag );
+          /** @since 2.11.0 recaptcha fix constributed by @netzgestaltung */
+          if ( $type !== 'captchar' ) { // really simple captcha gets called twice otherwise - and does not validate
+            if(!isset($data[$tag['name']])) continue 2; /*likely toggled and unused*/
+            $result = apply_filters( "wpcf7_validate_{$type}", $result, $tag );
+	  }
           break;
       }
     }
@@ -1376,9 +1379,10 @@ class Cf7_Grid_Layout_Public {
   *@param WPCF7_MailTag $mail_tag mail tag object of field being replaced.
   *@return string repalcement string.
   */
-  public function filter_table_tab_mail_tag($replaced, $submitted, $html, $mail_tag ){
+  public function filter_table_tab_mail_tag($replaced, $submitted, $html=false, $mail_tag=null ){
     $cf7form = WPCF7_ContactForm::get_current();
     $cf7form_key = Cf7_WP_Post_Table::form_key($cf7form->id());
+    if(empty($mail_tag)) return $replaced;
     $field_type = self::field_type($mail_tag->field_name(), $cf7form->id());
     $label = '';
     $build = false;
@@ -1508,16 +1512,14 @@ class Cf7_Grid_Layout_Public {
           }
           break;
         default: //singular fields.
-          if(empty($path)) continue;
+          if(empty($path)) continue 2;
           $idx++;
-          if(!in_array($attachments,$path)) $attachments[] = $path;
+          if(!in_array($path, $attachments)) $attachments[] = $path;
           $path = explode('/',$path);
           $filename = $path[count($path)-1];
           $components['body'].= apply_filters('cf7sg_annotate_mail_attach_grid_files','', $name, null, null, $idx,$filename, $_POST['_wpcf7_key']);
           break;
       }
-      //     break;
-      // }
     }
     $components['attachments'] = $attachments;
     return $components;

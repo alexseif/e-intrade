@@ -1,10 +1,10 @@
 === Smart Grid-Layout Design for Contact Form 7 ===
 Contributors: aurovrata
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CNEEQHW889FE6
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EDV4MEJLPT4VY
 Tags: contact form 7, contact form 7 module, form layout, styling, contact form 7 extension, responsive layout, multiple column form, grid layout, table inputs
 Requires at least: 4.7
 Requires PHP: 5.6
-Tested up to: 5.1.1
+Tested up to: 5.2.0
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -67,9 +67,22 @@ This plugin would not have been possible without the following open-source effor
 * [PHP Query](https://github.com/punkave/phpQuery) - a php class that enables traversing and manipulation of html documents using css selectors like JQuery.  This is used to build the modular functionality of form designs.
 
 = Thanks to =
-Birmania (@birmania) for providing:
+Birmania [@birmania](https://profiles.wordpress.org/birmania/) for providing:
+
 * a fix for js toggles.
 * a fix for file fields in tabs as mail attachments
+
+Andrew Browning [@altworks](https://profiles.wordpress.org/altworks/) for poviding:
+
+* an IE polyfill for frontend table fields.
+
+PenhTech [@penhtech](https://wordpress.org/support/users/penhtech/)
+
+* a fix for continue warnings in php7.3
+
+Thomas Fellinger [@netzgestaltung](https://profiles.wordpress.org/netzgestaltung/)
+
+* a fix for [Really Simple Captcha](https://wordpress.org/plugins/really-simple-captcha/) plugin.
 
 = Privacy Notices =
 
@@ -84,8 +97,9 @@ This plugin, in itself, does not:
 
 1. Install the Contact Form 7 plugin.
 2. Unpack this plugin archive file into your wp-content/plugins folder.
-3. Activate the plugin through the 'Plugins' menu in WordPress
-4. Read the FAQs & Screenshot captions to understand how to use this plugin.
+3. Activate the plugin through the 'Plugins' menu in WordPress.
+4. Create a new form to leverage the grid editor, existing forms can only be edited in text mode.
+5. Read the FAQs & Screenshot captions to understand how to use this plugin.
 
 == Frequently Asked Questions ==
 
@@ -198,13 +212,13 @@ Yes, identify the row in your text editor which implements your collapsible sect
 
 `<div class="container cf7sg-collapsible" data-open="true" ...`
 
-= 14. How can I display a table of fields in a mail message? =
+= 14bis. How can I display a table of fields in a mail message? =
 If you have a set of fields that are in a table/tab structure, the plugin is not aware of their relationship and as such does not build a table layout in a mail when you use them as tags in a message.  However, a filter is provided for you to achive this.  The filter #3 in the Post-form submit hooks allows you to build a table layout in an *html* mail.  Ensure the html format checkbox is selected in the your mail settings, else the filter will not fire.
 In you mail message body, place the mail tags contiguously for each field that is present in your table.  Hence, assuming you have a table with 3 fields, field-one, field-two, field-three.  Place their tags in the mail body as
 
 `[field-one][field-two][field-three]`
 
-copy the filter helper code and place it in your `functions.php` file.  The code sample assumes the above example fields and sets up a list element for each field, along with a column header.  These list elements are then styled to display them as tables in your mail.
+copy the filter helper code (see [screenshot](https://wordpress.org/plugins/cf7-grid-layout/#screenshots) #21) and place it in your *functions.php* file.  The code sample assumes the above example fields and sets up a list element for each field, along with a column header.  These list elements are then styled to display them as tables in your mail.
 
 = 15. How can I set a maximum number of rows to a table ? =
 
@@ -222,6 +236,24 @@ function add_custom_html($allowed, $cfk7_key){
   return $allowed;
 }
 `
+= 17. Is it possible to modify the default html markup for the grid cell and/or the required html markup in the label ? =
+
+Yes, there are filters that have been created to allow a user to modify the html structure.  See the Hook &amp; Filters #1, #2, and #3 ([screenshot](https://wordpress.org/plugins/cf7-grid-layout/#screenshots) #21).
+
+These filters will only impact new forms or new cells (rows/columns) created.
+
+For the required HTML markup in the label it is possible to manually change the html without the use of the filter by simply marking up your required symbol/text with a `span` element.  For example,
+
+`<span>(req)<\span>`
+
+in order to replace the existing markup.
+
+= 18. I can only edit my form in 'Text' mode, I cannot see the 'Grid' tab, why? =
+existing forms are not editable in the grid editor.
+
+Create a new form to be able to leverage the grid editor functionality.
+
+this plugin allows you to create grid layout forms by creating an htlm markup and a CSS stylesheet which displays your form fields in a responsive grid.
 
 == Screenshots ==
 
@@ -249,24 +281,22 @@ function add_custom_html($allowed, $cfk7_key){
 22. (22) You can set a maximum number of rows a user can add to a table, by adding the `data-max` attribute to your table element.
 
 == Changelog ==
+= 2.11.0 =
+* recaptch plugin fix by @netzgestaltung.
+* full-screen form editor button.
+
+= 2.10.5 =
+* bug fix on file attachments in notification email.
+= 2.10.4 =
+* add fix for custom required html in label.
+= 2.10.3 =
+* fix admin html filter parameter bug.
+= 2.10.2 =
+* code fix for [bug](https://wordpress.org/support/topic/bug-found-error-in-code/) found in mailchimp extension plugin
+* added IE polyfill for frontend table fields.
 = 2.10.1 =
 * fix _() function error in assets.
 * fix js error in cut and paste text editor on form submit.
 = 2.10.0 =
 * added 'cf7sg_kses_allowed_html' filter.
 * allowed custom html in forms.
-= 2.9.0 =
-* instroduction of mail tag value filter for individual fields.
-= 2.8.3 =
-* change codemirror editor to textarea#wpcf7-form and populate with html form.
-= 2.8.2 =
-* fix cf7 post type registration missing delete_posts caps.
-* fix attachments from other plugins (send pdf).
-= 2.8.1 =
-* messages bug fix
-= 2.8.0 =
-* fix bug on jquery deprecated function.
-* added max row functionality
-= 2.7.1 =
-* fix a bug on pretty pointer function call.
-* trim values in toggles that are closed.

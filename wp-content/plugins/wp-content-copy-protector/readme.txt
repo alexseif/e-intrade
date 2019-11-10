@@ -3,7 +3,7 @@ Contributors: wp-buy
 Donate link: http://goo.gl/UJVpbi
 Tags: content, content copy protection, content protection, copy protection, prevent copy, protect blog, image protect, image protection, no right click, plagiarism, secure content, content theft
 Requires at least: 2.5
-Tested up to: 4.9.5
+Tested up to: 5.2.3
 Stable tag: trunk
 
 This wp plugin protect the posts content from being copied by any other web site author (content copy protection) , you dont want your content to spread without your permission!!
@@ -64,6 +64,15 @@ your posts extremely simple without yelling at your readers</li>
 </ul>
 
 == Changelog ==
+= 1.7.1 =
+<ul>
+<li>Add dismiss button to the end of upgrade message</li>
+</ul>	
+= 1.7 =
+<ul>
+<li>New option to show Print preview message instead of showing page content when user try to print your page using CTRL+P key</li>
+<li>Fixes inside admin page layout</li>
+</ul>	
 = 1.6.2 =
 <ul>
 <li>Fix Fatal error: Cannot redeclare plugin_add_settings_link()</li>

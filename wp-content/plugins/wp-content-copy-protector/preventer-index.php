@@ -3,7 +3,7 @@
 Plugin Name: WP Content Copy Protection & No Right Click
 Plugin URI: http://wordpress.org/plugins/w-p-content-copy-protector/
 Description: This wp plugin protect the posts content from being copied by any other web site author , you dont want your content to spread without your permission!!
-Version: 1.6.2
+Version: 1.7.1
 Author: wp-buy
 Author URI: http://www.wp-buy.com/
 */
@@ -12,6 +12,8 @@ Author URI: http://www.wp-buy.com/
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 //define all variables the needed alot
 include 'the_globals.php';
+
+
 $wccp_settings = wccp_read_options();
 //---------------------------------------------------------<!-- SimpleTabs -->
 function wccp_enqueue_scripts() {
@@ -164,6 +166,17 @@ function alert_message()
 		document.getElementById("wpcp-error-message").className = "msgmsg-box-wpcp warning-wpcp hideme";
 	}
 	</script>
+	<?php 
+	global $wccp_settings;
+	if($wccp_settings['prnt_scr_msg'] != ''){ ?>
+	<style>
+	@media print {
+	body * { display: none !important;}
+		body:after {
+		content: "<?php echo $wccp_settings['prnt_scr_msg']; ?>"; }
+	}
+	</style>
+	<?php } ?>
 	<style type="text/css">
 	#wpcp-error-message {
 	    direction: ltr;
@@ -443,7 +456,8 @@ function wccp_default_options(){
 			'alert_msg_input' => '',
 			'alert_msg_h' => '',
 			'alert_msg_textarea' => '',
-			'alert_msg_emptyspaces' => ''
+			'alert_msg_emptyspaces' => '',
+			'prnt_scr_msg' => 'You are not allowed to print preview this page, Thank you'
 		);
 	return $wccp_settings;
 }
@@ -480,22 +494,52 @@ function wccp_options_page_pro() {
 //Make a WordPress function to add to the correct menu.
 function wpccp_after_plugin_row( $plugin_file, $plugin_data, $status ) {
 	$plugin_name = substr(__FILE__, strlen(ABSPATH . PLUGINDIR . '/'));
+	$class_name = '';
 	if ($plugin_file != $plugin_name) return;
 	$FS_PATH = plugin_basename( __FILE__ );
 	if ($FS_PATH)
 	{
 		$class_name = $plugin_data['slug'];
 		$p_url = "http://www.wp-buy.com/product/wp-content-copy-protection-pro/";
-		echo '<tr id="' .$class_name. '-plugin-update-tr" class="plugin-update-tr active">';
+		echo '<tr id="' .$class_name. '-plugin-update" class="active">';
 		echo '<th class="check-column" scope="row"></th>';
 		echo '<td colspan="3" class="plugin-update">';
-		echo '<div class="update-message" style="background:#FFFF99;margin-left:1px;" >';
-		echo 'You are running WP Content Copy Protection & No Right Click (free). To get more features, you can <a href="' .$p_url. '" target="_blank"><strong>Upgrade Now</strong></a>.';
+		echo '<div id="wccp-update-message" style="background:#edf4f7;padding:10px;" >';
+		echo 'You are running WP Content Copy Protection & No Right Click (free). To get more features, you can <a href="' .$p_url. '" target="_blank"><strong>Upgrade Now</strong></a>,    <a id="HideMe" href="javascript:void(0)"><strong>Dismiss</strong></a>.';
 		echo '</div>';
 		echo '</td>';
 		echo '</tr>';
 	}
+	?>
+	<script type="text/javascript">
+	function wccp_hide_upgrade_message()
+	{
+		jQuery("#wccp-update-message").empty(); 
+		jQuery("#wccp-update-message").removeAttr("style"); 
+		localStorage.setItem("wccp_upgrade_message", "hide_upgrade_msg");
+		if (!jQuery("#<?php echo $class_name;?>-update")[0]){// Do something if class exists
+			jQuery('#<?php echo $class_name;?>-plugin-update').closest('tr').prev().removeClass('update');
+		}
+		jQuery('#<?php echo $class_name;?>-plugin-update').empty();
+	}
+	jQuery(document).ready(function() {
+		
+		var row = jQuery('#<?php echo $class_name;?>-plugin-update').closest('tr').prev();
+		jQuery(row).addClass('update');
+		
+		jQuery("#HideMe").click(wccp_hide_upgrade_message);
+	  
+	  if(localStorage.getItem("wccp_upgrade_message") == "hide_upgrade_msg")
+	  {
+		 wccp_hide_upgrade_message();
+	  }
+
+	});
+	</script>
+	<?php
 }
+?>
+<?php
 $path = plugin_basename( __FILE__ );
 add_action("after_plugin_row_{$path}", "wpccp_after_plugin_row", 10, 3 );
 //------------------------------------------------------------------------

@@ -79,6 +79,10 @@ class Jetpack_Debugger {
 			wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'jetpack' ) );
 		}
 
+		$support_url = Jetpack::is_development_version()
+			? 'https://jetpack.com/contact-support/beta-group/'
+			: 'https://jetpack.com/contact-support/';
+
 		$data       = Jetpack_Debug_Data::debug_data();
 		$debug_info = '';
 		foreach ( $data as $datum ) {
@@ -109,7 +113,16 @@ class Jetpack_Debugger {
 							echo '<div class="jetpack-test-error">';
 							echo '<p><a class="jetpack-test-heading" href="#">' . esc_html( $fail['message'] );
 							echo '<span class="noticon noticon-collapse"></span></a></p>';
-							echo '<p class="jetpack-test-details">' . esc_html( $fail['resolution'] ) . '</p>';
+							echo '<p class="jetpack-test-details">' . wp_kses(
+								$fail['resolution'],
+								array(
+									'a' => array(
+										'href'   => array(),
+										'target' => array(),
+										'rel'    => array(),
+									),
+								)
+							) . '</p>';
 							echo '</div>';
 
 							$debug_info .= "FAILED TESTS!\r\n";
@@ -140,9 +153,9 @@ class Jetpack_Debugger {
 									),
 								)
 							),
-							'http://jetpack.com/support/getting-started-with-jetpack/known-issues/',
-							'http://jetpack.com/support/getting-started-with-jetpack/known-issues/',
-							'http://jetpack.com/support/',
+							'https://jetpack.com/support/getting-started-with-jetpack/known-issues/',
+							'https://jetpack.com/support/getting-started-with-jetpack/known-issues/',
+							'https://jetpack.com/support/',
 							'https://wordpress.org/support/plugin/jetpack'
 						);
 						?>
@@ -225,7 +238,7 @@ class Jetpack_Debugger {
 							__( '<a href="%1$s">Contact our Happiness team</a>. When you do, please include the <a href="%2$s">full debug information from your site</a>.', 'jetpack' ),
 							array( 'a' => array( 'href' => array() ) )
 						),
-						'https://jetpack.com/contact-support/',
+						esc_url( $support_url ),
 						esc_url( admin_url() . 'site-health.php?tab=debug' )
 					);
 					$hide_debug = true;
@@ -236,7 +249,7 @@ class Jetpack_Debugger {
 							__( '<a href="%s">Contact our Happiness team</a>. When you do, please include the full debug information below.', 'jetpack' ),
 							array( 'a' => array( 'href' => array() ) )
 						),
-						'https://jetpack.com/contact-support/'
+						esc_url( $support_url )
 					);
 					$hide_debug = false;
 				}

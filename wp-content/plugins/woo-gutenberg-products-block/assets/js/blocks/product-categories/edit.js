@@ -4,16 +4,20 @@
 import { __ } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
 import { InspectorControls } from '@wordpress/editor';
-import { PanelBody, ToggleControl } from '@wordpress/components';
+import { PanelBody, ToggleControl, Placeholder } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
 import './editor.scss';
 import Block from './block.js';
+import ToggleButtonControl from '../../components/toggle-button-control';
+import getCategories from './get-categories';
+import { IconFolder } from '../../components/icons';
 
 export default function( { attributes, setAttributes } ) {
 	const { hasCount, hasEmpty, isDropdown, isHierarchical } = attributes;
+	const categories = getCategories( attributes );
 
 	return (
 		<Fragment>
@@ -22,16 +26,6 @@ export default function( { attributes, setAttributes } ) {
 					title={ __( 'Content', 'woo-gutenberg-products-block' ) }
 					initialOpen
 				>
-					<ToggleControl
-						label={ __( 'Show as dropdown', 'woo-gutenberg-products-block' ) }
-						help={
-							isDropdown ?
-								__( 'Categories are shown in a dropdown.', 'woo-gutenberg-products-block' ) :
-								__( 'Categories are shown in a list.', 'woo-gutenberg-products-block' )
-						}
-						checked={ isDropdown }
-						onChange={ () => setAttributes( { isDropdown: ! isDropdown } ) }
-					/>
 					<ToggleControl
 						label={ __( 'Show product count', 'woo-gutenberg-products-block' ) }
 						help={
@@ -63,8 +57,32 @@ export default function( { attributes, setAttributes } ) {
 						onChange={ () => setAttributes( { hasEmpty: ! hasEmpty } ) }
 					/>
 				</PanelBody>
+				<PanelBody
+					title={ __( 'List Settings', 'woo-gutenberg-products-block' ) }
+					initialOpen
+				>
+					<ToggleButtonControl
+						label={ __( 'Display style', 'woo-gutenberg-products-block' ) }
+						value={ isDropdown ? 'dropdown' : 'list' }
+						options={ [
+							{ label: __( 'List', 'woo-gutenberg-products-block' ), value: 'list' },
+							{ label: __( 'Dropdown', 'woo-gutenberg-products-block' ), value: 'dropdown' },
+						] }
+						onChange={ ( value ) => setAttributes( { isDropdown: 'dropdown' === value } ) }
+					/>
+				</PanelBody>
 			</InspectorControls>
-			<Block attributes={ attributes } isPreview />
+			{ categories.length > 0 ? (
+				<Block attributes={ attributes } categories={ categories } isPreview />
+			) : (
+				<Placeholder
+					className="wc-block-product-categories"
+					icon={ <IconFolder /> }
+					label={ __( 'Product Categories List', 'woo-gutenberg-products-block' ) }
+				>
+					{ __( "This block shows product categories for your store. In order to preview this you'll first need to create a product and assign it to a category.", 'woo-gutenberg-products-block' ) }
+				</Placeholder>
+			) }
 		</Fragment>
 	);
 }

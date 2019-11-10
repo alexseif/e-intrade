@@ -2,6 +2,8 @@
 
 namespace Automattic\Jetpack\Sync;
 
+use Automattic\Jetpack\Roles;
+
 /**
  * This class monitors actions and logs them to the queue to be sent
  */
@@ -104,13 +106,11 @@ class Listener {
 			   ( ( $queue_size + 1 ) < $this->sync_queue_size_limit );
 	}
 
-	function full_sync_action_handler() {
-		$args = func_get_args();
+	function full_sync_action_handler( ...$args ) {
 		$this->enqueue_action( current_filter(), $args, $this->full_sync_queue );
 	}
 
-	function action_handler() {
-		$args = func_get_args();
+	function action_handler( ...$args ) {
 		$this->enqueue_action( current_filter(), $args, $this->sync_queue );
 	}
 
@@ -267,7 +267,8 @@ class Listener {
 			$user = wp_get_current_user();
 		}
 
-		$translated_role = \Jetpack::translate_user_to_role( $user );
+		$roles           = new Roles();
+		$translated_role = $roles->translate_user_to_role( $user );
 
 		$actor = array(
 			'wpcom_user_id'    => null,

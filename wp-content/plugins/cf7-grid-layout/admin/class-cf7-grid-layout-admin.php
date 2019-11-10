@@ -132,7 +132,6 @@ class Cf7_Grid_Layout_Admin {
 	 */
 	public function enqueue_scripts($page) {
 		global $post;
-
     //debug_msg($screen, $this->custom_type );
     $plugin_dir = plugin_dir_url( __DIR__ );
     if('toplevel_page_wpcf7' == $page){
@@ -155,8 +154,8 @@ class Cf7_Grid_Layout_Admin {
           'cf7-grid-codemirror-js',
           'cf7sgeditor',
           array(
-            'mode' => apply_filters('cf7sg_admin_editor_mode', 'shortcode', $post->name),
-						'theme' => apply_filters('cf7sg_admin_editor_theme', 'paraiso-light', $post->name),
+            'mode' => apply_filters('cf7sg_admin_editor_mode', 'shortcode', $post->post_name),
+						'theme' => apply_filters('cf7sg_admin_editor_theme', 'paraiso-light', $post->post_name),
           )
         );
         wp_enqueue_script( $this->plugin_name, $plugin_dir . 'admin/js/cf7-grid-layout-admin.js', array('cf7-grid-codemirror-js', 'jquery-ui-sortable' ), $this->version, true );
@@ -164,10 +163,10 @@ class Cf7_Grid_Layout_Admin {
           $this->plugin_name,
           'cf7grid',
           array(
-            'preHTML' => apply_filters('cf7sg_pre_cf7_field_html', '<div class="field"><label></label>', $post->name),
-						'postHTML' => apply_filters('cf7sg_post_cf7_field_html', '<p class="info-tip"></p></div>', $post->name),
-						'requiredHTML' => apply_filters('cf7sg_required_cf7_field_html', '<em>*</em>', $post->name),
-						'ui' => apply_filters('cf7sg_grid_ui', true, $post->name)
+            'preHTML' => apply_filters('cf7sg_pre_cf7_field_html', '<div class="field"><label></label>', $post->post_name),
+						'postHTML' => apply_filters('cf7sg_post_cf7_field_html', '<p class="info-tip"></p></div>', $post->post_name),
+						'requiredHTML' => apply_filters('cf7sg_required_cf7_field_html', '<em>*</em>', $post->post_name),
+						'ui' => apply_filters('cf7sg_grid_ui', true, $post->post_name)
           )
         );
         wp_enqueue_script( 'cf7sg-dynamic-tag-js', $plugin_dir . 'admin/js/cf7sg-dynamic-tag.js', array('jquery','wpcf7-admin-taggenerator' ), $this->version, true );
@@ -580,10 +579,8 @@ class Cf7_Grid_Layout_Admin {
     );
     $allowed_tags['script']=array('type'=>1);
     $allowed_tags = apply_filters('cf7sg_kses_allowed_html',$allowed_tags, $_POST['post_name']);
-    debug_msg($_POST['wpcf7-form'], 'admin form ');
     if(isset( $_POST['wpcf7-form'] )){
       $args['form'] = wp_kses($_POST['wpcf7-form'], $allowed_tags);
-      debug_msg($args['form'], 'saved form ');
     }
   	$args['mail'] = isset( $_POST['wpcf7-mail'] ) ? wpcf7_sanitize_mail( $_POST['wpcf7-mail'] ): array();
   	$args['mail_2'] = isset( $_POST['wpcf7-mail-2'] ) ? wpcf7_sanitize_mail( $_POST['wpcf7-mail-2'] ): array();
@@ -1049,10 +1046,10 @@ class Cf7_Grid_Layout_Admin {
   public function edit_pointers($pointers){
     ob_start();
     include_once 'partials/pointers/cf7sg-pointer-update-forms.php';
-    $content =ob_get_clean();
+    $content =ob_get_contents();
     $pointers['update_forms_pointer'] = array($content, 'left', 'center');
     /* shortcodes */
-    ob_start();
+    ob_clean();
     include_once 'partials/pointers/cf7sg-pointer-shortcodes.php';
     $content = ob_get_clean();
     $pointers['cf7sg_shortcodes'] = array($content, 'top', 'top');

@@ -67,6 +67,8 @@ if($post_action == 'update')
 	if(isset($_POST["alert_msg_textarea"])) $alert_msg_textarea = sanitize_text_field($_POST["alert_msg_textarea"]);
 	$alert_msg_emptyspaces = '';
 	if(isset($_POST["alert_msg_emptyspaces"])) $alert_msg_emptyspaces = sanitize_text_field($_POST["alert_msg_emptyspaces"]);
+	$prnt_scr_msg = '';
+	if(isset($_POST["prnt_scr_msg"])) $prnt_scr_msg = sanitize_text_field($_POST["prnt_scr_msg"]);
 	
 	//----------------------------------------------------Get the  options array values
 	$wccp_settings = 
@@ -95,7 +97,8 @@ if($post_action == 'update')
 			'alert_msg_input' => $alert_msg_input,
 			'alert_msg_h' => $alert_msg_h,
 			'alert_msg_textarea' => $alert_msg_textarea,
-			'alert_msg_emptyspaces' => $alert_msg_emptyspaces
+			'alert_msg_emptyspaces' => $alert_msg_emptyspaces,
+			'prnt_scr_msg' => $prnt_scr_msg
 		);
 
 		if ($wccp_settings != '' ) {
@@ -269,10 +272,21 @@ background: #FFFFFF;
 			<tr>
 				<td width="221" height="33"><font face="Tahoma" size="2">Selection disabled message</font></td>
 				<td colspan="2">
-				<table border="0" width="49%" cellspacing="0" cellpadding="0">
+				<table border="0" width="59%" cellspacing="0" cellpadding="0">
 					<tr>
 						<td>
-						<input type="text" placeholder="Enter something" class="form-control" name="smessage"  value="<?php echo $wccp_settings['smessage']; ?>"></td>
+						<input type="text" style="width: 100%;" placeholder="Enter something" class="form-control" name="smessage"  value="<?php echo $wccp_settings['smessage']; ?>"></td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+			<tr>
+				<td width="221" height="33"><font face="Tahoma" size="2">Print preview message</font></td>
+				<td colspan="2">
+				<table border="0" width="99%" cellspacing="0" cellpadding="0">
+					<tr>
+						<td>
+						<textarea placeholder="Enter something" style="height: 110px; width: 100%;" class="form-control" name="prnt_scr_msg"><?php echo $wccp_settings['prnt_scr_msg']; ?></textarea></td>
 					</tr>
 				</table>
 				</td>
@@ -383,7 +397,7 @@ background: #FFFFFF;
 				<td width="221"><font face="Tahoma" size="2"><b>Pages</b> Protection by CSS</font></td>
 				<td align="center">
 				<font color="#FF0000">Premium&nbsp;
-				<script>$("select").selectpicker({style: 'btn-hg btn-primary', menuStyle: 'dropdown-inverse'});</script>
+				
 				</font>
 				</td>
 				<td align="left"><font face="Tahoma" size="2">Protect your static pages by CSS tricks</font></td>
