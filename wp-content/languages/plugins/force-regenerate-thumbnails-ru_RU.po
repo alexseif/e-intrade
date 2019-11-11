@@ -1,43 +1,27 @@
-# Translation of Development (trunk) in Russian
-# This file is distributed under the same license as the Development (trunk) package.
+# Translation of Plugins - Force Regenerate Thumbnails - Development (trunk) in Russian
+# This file is distributed under the same license as the Plugins - Force Regenerate Thumbnails - Development (trunk) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2016-09-21 10:40:03+0000\n"
+"PO-Revision-Date: 2019-07-18 20:54:31+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: GlotPress/2.1.0-alpha\n"
-"Project-Id-Version: Development (trunk)\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: ru\n"
+"Project-Id-Version: Plugins - Force Regenerate Thumbnails - Development (trunk)\n"
 
-#. #-#-#-#-#  tmp-force-regenerate-thumbnails.pot (Force Regenerate Thumbnails
-#. 2.0.5)  #-#-#-#-#
-#. Plugin Name of the plugin/theme
-#: force-regenerate-thumbnails.php:91 force-regenerate-thumbnails.php:134
-#: force-regenerate-thumbnails.php:155 force-regenerate-thumbnails.php:178
-#: force-regenerate-thumbnails.php:222
-msgid "Force Regenerate Thumbnails"
-msgstr "Force Regenerate Thumbnails"
-
-#: force-regenerate-thumbnails.php:134
-msgid "Regenerate the thumbnails for this single image"
-msgstr "Пересоздать миниатюры для этого изображения"
-
-#: force-regenerate-thumbnails.php:231
-msgid "Cheatin&#8217; uh?"
-msgstr "Хакер?"
+#: force-regenerate-thumbnails.php:262
+msgid "To go back to the previous page, <a href=\"%s\">click here</a>."
+msgstr "Чтоб вернутся на предыдущую страницу, <a href=\"%s\">нажмите здесь</a>."
 
 #: force-regenerate-thumbnails.php:246
 msgid "Unable to find any images. Are you sure <a href='%s'>some exist</a>?"
 msgstr "Не найдено ни одного изображения. Вы уверены, что <a href='%s'>они есть</a>?"
 
-#: force-regenerate-thumbnails.php:258
-msgid "Please be patient while the thumbnails are regenerated. You will be notified via this page when the regenerating is completed."
-msgstr "Сохраняйте спокойствие. Вы будете уведомлены сообщением на этой странице по окончанию процесса. "
-
-#: force-regenerate-thumbnails.php:262
-msgid "To go back to the previous page, <a href=\"%s\">click here</a>."
-msgstr "Чтоб вернутся на предыдущую страницу, <a href=\"%s\">нажмите здесь</a>."
+#: force-regenerate-thumbnails.php:134
+msgid "Regenerate the thumbnails for this single image"
+msgstr "Пересоздать миниатюры для этого изображения"
 
 #: force-regenerate-thumbnails.php:265
 msgid "All done! %1$s image(s) were successfully resized in %2$s seconds and there were %3$s failure(s). To try regenerating the failed images again, <a href=\"%4$s\">click here</a>. %5$s"
@@ -51,66 +35,29 @@ msgstr "Все готово! Для %1$s изображения(ий) были �
 msgid "You must enable Javascript in order to proceed!"
 msgstr "Чтобы продолжить, вы должны включить Javascript в браузере!"
 
-#: force-regenerate-thumbnails.php:275
-msgid "Abort Process"
-msgstr "Прервать Процесс"
-
-#: force-regenerate-thumbnails.php:277
-msgid "Process Information"
-msgstr "Информация о процессе"
-
-#: force-regenerate-thumbnails.php:280
-msgid "Total: %s"
-msgstr "Итого: %s"
-
-#: force-regenerate-thumbnails.php:281
-msgid "Success: %s"
-msgstr "Успешно: %s"
-
-#: force-regenerate-thumbnails.php:282
-msgid "Failure: %s"
-msgstr "Неудачно: %s"
+#: force-regenerate-thumbnails.php:406
+msgid "Regenerate All Thumbnails"
+msgstr "Пересоздать все миниатюры"
 
 #: force-regenerate-thumbnails.php:313
 msgid "Stopping..."
 msgstr "Остановка..."
 
-#: force-regenerate-thumbnails.php:402
-msgid "Pressing the follow button, you can regenerate thumbnails for all images that you have uploaded to your blog."
-msgstr "Нажимая на эту кнопку, Вы можете пересоздать миниатюры для всех изображений в Вашем блоге."
-
-#: force-regenerate-thumbnails.php:406
-msgid "Regenerate All Thumbnails"
-msgstr "Пересоздать все миниатюры"
-
-#: force-regenerate-thumbnails.php:412
-msgid "You can regenerate all thumbnails for specific images from the <a href='%s'>Media</a> page. (WordPress 3.1+ only)"
-msgstr "Вы можете пересоздать миниатюры для отдельных изображений на  странице <a href='%s'>Медиа</a>. (для WordPress 3.1+)"
-
-#: force-regenerate-thumbnails.php:444 force-regenerate-thumbnails.php:448
-msgid "Failed: %d is an invalid image ID."
-msgstr "Не удалось: %d неверное ID изображения."
-
-#: force-regenerate-thumbnails.php:452
-msgid "Your user account does not have permission to regenerate images."
-msgstr "У Вас недостаточно прав для выполнения данного действия."
-
-#: force-regenerate-thumbnails.php:480 force-regenerate-thumbnails.php:504
-#: force-regenerate-thumbnails.php:507
-msgid "The originally uploaded image file cannot be found at &quot;%s&quot;."
-msgstr "Оригинал не может быть найден в &quot;%s&quot;."
-
-#: force-regenerate-thumbnails.php:483
-msgid "The originally uploaded image file cannot be found."
-msgstr "Оригинал не найден."
-
 #: force-regenerate-thumbnails.php:576
 msgid "Unknown failure reason."
 msgstr "Неизвестная причина неудачи."
 
-#: force-regenerate-thumbnails.php:626
-msgid "<b>&quot;%s&quot; (ID %s)</b>"
-msgstr "<b>&quot;%s&quot; (ID %s)</b>"
+#: force-regenerate-thumbnails.php:258
+msgid "Please be patient while the thumbnails are regenerated. You will be notified via this page when the regenerating is completed."
+msgstr "Сохраняйте спокойствие. Вы будете уведомлены сообщением на этой странице по окончанию процесса. "
+
+#: force-regenerate-thumbnails.php:275
+msgid "Abort Process"
+msgstr "Прервать Процесс"
+
+#: force-regenerate-thumbnails.php:280
+msgid "Total: %s"
+msgstr "Итого: %s"
 
 #: force-regenerate-thumbnails.php:630
 msgid "<code>BaseDir: %s</code><br />"
@@ -136,17 +83,38 @@ msgstr "<code>Image Debug 3: %s</code><br />"
 msgid "<code>Image Debug 4: %s</code><br />"
 msgstr "<code>Image Debug 4: %s</code><br />"
 
-#: force-regenerate-thumbnails.php:641
-msgid "<br />Deleted: %s"
-msgstr "<br />Удалено: %s"
+#: force-regenerate-thumbnails.php:626
+msgid "<b>&quot;%s&quot; (ID %s)</b>"
+msgstr "<b>&quot;%s&quot; (ID %s)</b>"
+
+#: force-regenerate-thumbnails.php:452
+msgid "Your user account does not have permission to regenerate images."
+msgstr "У Вас недостаточно прав для выполнения данного действия."
+
+#: force-regenerate-thumbnails.php:480 force-regenerate-thumbnails.php:504
+#: force-regenerate-thumbnails.php:507
+msgid "The originally uploaded image file cannot be found at &quot;%s&quot;."
+msgstr "Оригинал не может быть найден в &quot;%s&quot;."
+
+#: force-regenerate-thumbnails.php:483
+msgid "The originally uploaded image file cannot be found."
+msgstr "Оригинал не найден."
+
+#. Author URI of the plugin/theme
+msgid "http://www.pedroelsner.com/"
+msgstr "http://www.pedroelsner.com/"
+
+#. Author of the plugin/theme
+msgid "Pedro Elsner"
+msgstr "Педро Элснер"
+
+#: force-regenerate-thumbnails.php:402
+msgid "Pressing the follow button, you can regenerate thumbnails for all images that you have uploaded to your blog."
+msgstr "Нажимая на эту кнопку, Вы можете пересоздать миниатюры для всех изображений в Вашем блоге."
 
 #: force-regenerate-thumbnails.php:644
 msgid "<br /><b><span style=\"color: #DD3D36;\">Deleted error: %s</span></b>"
 msgstr "<br /><b><span style=\"color: #DD3D36;\">Ошибка при удалении: %s</span></b>"
-
-#: force-regenerate-thumbnails.php:645
-msgid "<br /><span style=\"color: #DD3D36;\">Please, check the folder permission (chmod 777): %s</span>"
-msgstr "<br /><span style=\"color: #DD3D36;\">Пожалуйста, проверьте права доступа папки (chmod 777): %s</span>"
 
 #: force-regenerate-thumbnails.php:648
 msgid "<br />Regenerate: %s</span>"
@@ -168,10 +136,43 @@ msgstr "http://pedroelsner.com/2012/08/forcando-a-atualizacao-de-thumbnails-no-w
 msgid "Delete and REALLY force the regenerate thumbnail."
 msgstr "Удалить и ДЕЙСТВИТЕЛЬНО пересоздать миниатюру."
 
-#. Author of the plugin/theme
-msgid "Pedro Elsner"
-msgstr "Педро Элснер"
+#: force-regenerate-thumbnails.php:277
+msgid "Process Information"
+msgstr "Информация о процессе"
 
-#. Author URI of the plugin/theme
-msgid "http://www.pedroelsner.com/"
-msgstr "http://www.pedroelsner.com/"
+#: force-regenerate-thumbnails.php:412
+msgid "You can regenerate all thumbnails for specific images from the <a href='%s'>Media</a> page. (WordPress 3.1+ only)"
+msgstr "Вы можете пересоздать миниатюры для отдельных изображений на  странице <a href='%s'>Медиа</a>. (для WordPress 3.1+)"
+
+#: force-regenerate-thumbnails.php:282
+msgid "Failure: %s"
+msgstr "Неудачно: %s"
+
+#: force-regenerate-thumbnails.php:281
+msgid "Success: %s"
+msgstr "Успешно: %s"
+
+#: force-regenerate-thumbnails.php:444 force-regenerate-thumbnails.php:448
+msgid "Failed: %d is an invalid image ID."
+msgstr "Не удалось: %d неверное ID изображения."
+
+#: force-regenerate-thumbnails.php:641
+msgid "<br />Deleted: %s"
+msgstr "<br />Удалено: %s"
+
+#: force-regenerate-thumbnails.php:645
+msgid "<br /><span style=\"color: #DD3D36;\">Please, check the folder permission (chmod 777): %s</span>"
+msgstr "<br /><span style=\"color: #DD3D36;\">Пожалуйста, проверьте права доступа папки (chmod 777): %s</span>"
+
+#. #-#-#-#-#  tmp-force-regenerate-thumbnails.pot (Force Regenerate Thumbnails
+#. 2.0.5)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: force-regenerate-thumbnails.php:91 force-regenerate-thumbnails.php:134
+#: force-regenerate-thumbnails.php:155 force-regenerate-thumbnails.php:178
+#: force-regenerate-thumbnails.php:222
+msgid "Force Regenerate Thumbnails"
+msgstr "Force Regenerate Thumbnails"
+
+#: force-regenerate-thumbnails.php:231
+msgid "Cheatin&#8217; uh?"
+msgstr "Мухлюешь?"
