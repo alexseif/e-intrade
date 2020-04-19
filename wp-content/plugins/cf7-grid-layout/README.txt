@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: contact form 7, contact form 7 module, form layout, styling, contact form 7 extension, responsive layout, multiple column form, grid layout, table inputs
 Requires at least: 4.7
 Requires PHP: 5.6
-Tested up to: 5.2.0
+Tested up to: 5.3
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -159,6 +159,16 @@ function filter_pre_html($html, $cf7_key){
 **Custom scripts**
 The plugin will look for a javascript file `js/{$cf7key}.js` from the base of your theme root folder and load it on the page where your form is displayed.  Create a `js/` subfolder in your theme (or child theme folder), and create a file called `<your-form-cf7key>.js` in which you place your custom javascript code.
 
+In addition if you need to localise your custom script, you can do so using the following action hook,
+`
+add_action('smart_grid_register_custom_script', 'localise_custom_scritp', 10,1);
+function localise_custom_scritp($cf7_key){
+  if('my-form'!=$cf7_key) return;
+  //your script is enqueued with the handle $cf7_key.'-js'
+  wp_localize_script($cf7_key.'-js', 'customObj', array('key1'=>'value1'));
+}
+`
+
 The `$cf7key` is the unique key associated with your form which you can find in the Information metabox of your form edit page.
 
 If you wish to [wp_enqueue_script](https://developer.wordpress.org/reference/functions/wp_enqueue_script/) a general javascript file for all your forms, you can use the hook `smart_grid_register_scripts`,
@@ -181,7 +191,31 @@ Yes, as of v1.1 of this plugin, toggled sections input fields are disabled when 
 Please note that in the back-end, these fields which are listed in the form layout but are not submitted are set eventually set as null in the filtered submitted data.  So if you hook a functionality post the form-submission, be aware that you also need to test submitted values for `NULL` as opposed to empty.
 
 = 10.Can I group toggled sections so as to have either/or sections ?=
-Yes, with v1.1 you can the `data-group` attribute which by default is empty to regroup toggled sections and therefore ensure that only 1 of these grouped sections is used by a user.  Edit your form in the html editor (Text tab) and fill the `data-group` attribute with the same value (no spaces) for each toggled section (`div.container.with-toggle`) you wish to re-group.
+Yes, with v1.1 you can the `data-group` attribute which by default is empty to regroup toggled sections and therefore ensure that only 1 of these grouped sections is used by a user.  Edit your form in the html editor (Text tab) and fill the `data-group` attribute with the same value (no spaces) for each toggled section (`div.container.with-toggle`) you wish to re-group,
+`
+<div class="container cf7sg-collapsible with-toggle" id="0sTn7L" data-group="group1">
+  <div class="cf7sg-collapsible-title"><span class="cf7sg-title toggled">Name &amp; Contact</span>
+    <div class="toggle toggle-light" data-on="Yes" data-off="No"></div>
+  </div>
+  <div class="row">
+    <div class="columns one-third">
+    </div>
+    <div class="columns one-third">
+    </div>
+    <div class="columns one-third">
+    </div>
+  </div>
+</div>
+<div class="container cf7sg-collapsible with-toggle" id="CNeqCy" data-group="group1">
+  <div class="cf7sg-collapsible-title"><span class="cf7sg-title toggled">Address</span>
+    <div class="toggle toggle-light" data-on="Yes" data-off="No"></div>
+  </div>
+  <div class="row">
+    <div class="columns full">
+    </div>
+  </div>
+</div>
+`
 
 = 11.I am using Post My CF7 Form plugin, how are toggles status saved in the database? =
 When you install Post My CF7 Form plugin to map your form submissions to posts in the dashboard, this plugin will automatically save the toggle status, so that draft forms can be re-loaded as well accessing the data for later use.  The status of the toggle is saved to the custom meta-field `cf7sg_toggles_status`,
@@ -281,6 +315,22 @@ this plugin allows you to create grid layout forms by creating an htlm markup an
 22. (22) You can set a maximum number of rows a user can add to a table, by adding the `data-max` attribute to your table element.
 
 == Changelog ==
+= 3.0.3 =
+* fix add_cap bug for deleted roles.
+= 3.0.2 =
+* added 'wpcf7_manage_integration' cap to admin role.
+= 3.0.1 =
+* fix pointers didmiss bug.
+= 3.0.0 =
+* clean-up core integration with cf7 plugin.
+* add WP std capabilities for better role management.
+* automatic detection of required js scripts / css styling when form saved.
+* more efficient loading of front-end resources (js/css).
+* enabling benchmark fields for non-grid forms.
+* enabling dynamic_select fields for non-grid forms.
+* enabling sgv- validation for non-grid forms.
+* added pointers to form edit screen.
+
 = 2.11.0 =
 * recaptch plugin fix by @netzgestaltung.
 * full-screen form editor button.

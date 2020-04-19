@@ -3,7 +3,7 @@ Contributors: wp-buy
 Donate link: http://goo.gl/UJVpbi
 Tags: content, content copy protection, content protection, copy protection, prevent copy, protect blog, image protect, image protection, no right click, plagiarism, secure content, content theft
 Requires at least: 2.5
-Tested up to: 5.2.3
+Tested up to: 5.3
 Stable tag: trunk
 
 This wp plugin protect the posts content from being copied by any other web site author (content copy protection) , you dont want your content to spread without your permission!!
@@ -64,6 +64,14 @@ your posts extremely simple without yelling at your readers</li>
 </ul>
 
 == Changelog ==
+= 1.7.3 =
+<ul>
+<li>Unwanted ad removed</li>
+</ul>	
+= 1.7.2 =
+<ul>
+<li>Fix the error Undefined index: prnt_scr_msg in preventer-index.php on line 171</li>
+</ul>	
 = 1.7.1 =
 <ul>
 <li>Add dismiss button to the end of upgrade message</li>

@@ -51,9 +51,21 @@ if(!class_exists('Cf7_WP_Post_Table')){
 
     protected function __construct(){
       $this->hooks_set= false;
-      $this->version = "1.1";
+      $this->version = "1.2";
     }
-
+    /**
+    * get cf7 post type set by cf7 plugin.
+    *
+    *@since 3.0.0
+    *@return string post type.
+    */
+    static private function cf7_post_type(){
+      $type = 'wpcf7_post_type_notset';
+      if(class_exists('WPCF7_ContactForm') ) {
+        $type = WPCF7_ContactForm::post_type;
+      }
+      return $type;
+    }
     public static function set_table(){
       if(null === self::$singleton ){
         self::$singleton = new self();
@@ -75,7 +87,7 @@ if(!class_exists('Cf7_WP_Post_Table')){
   	 */
   	public function enqueue_styles() {
       $screen = get_current_screen();
-      if ('wpcf7_contact_form' != $screen->post_type){
+      if (self::cf7_post_type() != $screen->post_type){
         return;
       }
 
@@ -90,7 +102,7 @@ if(!class_exists('Cf7_WP_Post_Table')){
   	}
     public function enqueue_script() {
       $screen = get_current_screen();
-      if ('wpcf7_contact_form' != $screen->post_type){
+      if (self::cf7_post_type() != $screen->post_type){
         return;
       }
 
@@ -101,7 +113,7 @@ if(!class_exists('Cf7_WP_Post_Table')){
         case 'edit':
           //get all cf7 forms
           $cf7_posts = get_posts(array(
-            'post_type'=>'wpcf7_contact_form',
+            'post_type'=>self::cf7_post_type(),
             'posts_per_page' => -1,
           ));
           $keys=array();
@@ -146,7 +158,7 @@ if(!class_exists('Cf7_WP_Post_Table')){
       else{
         $form_id = 0;
         $forms = get_posts(array(
-          'post_type' => 'wpcf7_contact_form',
+          'post_type' => self::cf7_post_type(),
           'post_name__in' => array($key)
         ));
         if(!empty($forms)){
@@ -185,7 +197,7 @@ if(!class_exists('Cf7_WP_Post_Table')){
     * @since 1.1.3
     */
     public static function is_cf7_admin_page(){
-      if(!isset($_GET['post_type']) || false === strpos($_GET['post_type'],WPCF7_ContactForm::post_type) ){
+      if(!isset($_GET['post_type']) || false === strpos($_GET['post_type'], self::cf7_post_type()) ){
   			return false;
   		}else{
         $screen = get_current_screen();
@@ -221,10 +233,10 @@ if(!class_exists('Cf7_WP_Post_Table')){
     *
     */
     public function modify_cf7_post_type(){
-      if(class_exists('WPCF7_ContactForm') &&  post_type_exists( WPCF7_ContactForm::post_type ) ) {
+      if(post_type_exists( self::cf7_post_type() ) ) {
           global $wp_post_types;
-          $wp_post_types[WPCF7_ContactForm::post_type]->public = true;
-          $wp_post_types[WPCF7_ContactForm::post_type]->show_ui = true;
+          $wp_post_types[self::cf7_post_type()]->public = false;
+          $wp_post_types[self::cf7_post_type()]->show_ui = true;
       }
     }
 
@@ -239,9 +251,9 @@ if(!class_exists('Cf7_WP_Post_Table')){
       remove_submenu_page( 'wpcf7', 'wpcf7' );
       $hook = add_submenu_page(
         'wpcf7',
-        __( 'Edit Form Types', 'contact-form-7' ),
-        __( 'Form Types', 'contact-form-7' ),
-        'manage_options',
+        __cf7sg( 'Edit Form Types' ),
+        __cf7sg( 'Form Types' ),
+        'wpcf7_read_contact_forms',
         'edit-tags.php?taxonomy=wpcf7_type&post_type=wpcf7_contact_form'
       );
     }
@@ -286,7 +298,7 @@ if(!class_exists('Cf7_WP_Post_Table')){
     */
     public function modify_cf7_list_columns($columns){
       $columns['shortcode'] = 'Shortcode<br /><span class="cf7-help-tip"><a href="javascript:void();">What\'s this?</a><span class="cf7-short-info">Use this shortcode the same way you would use the contact-form-7 shortcode. (See the plugin page for more information )</span></span>';
-      $columns['cf7_key'] = __('Form key', 'contact-form-7');
+      $columns['cf7_key'] = __cf7sg('Form key');
       return $columns;
     }
     /**
@@ -332,26 +344,12 @@ if(!class_exists('Cf7_WP_Post_Table')){
         //check for your post type
         if('trash'==$post->post_status) return array();
 
-        if ($post->post_type =="wpcf7_contact_form"){
+        if ($post->post_type ==self::cf7_post_type()){
           $form = WPCF7_ContactForm::get_instance($post->ID);
           $url = admin_url( 'post.php?post=' . absint( $form->id() ) . '&action=edit');
-          $edit_link = add_query_arg( array( 'action' => 'edit' ), $url );
-          $idx = strpos($actions['trash'],'_wpnonce=') + 9;
-          $nonce = substr($actions['trash'], $idx, strpos($actions['trash'],'"', $idx) - $idx);
 
           if ( current_user_can( 'wpcf7_edit_contact_form', $form->id() ) ) {
-            $actions['edit'] = sprintf(
-              '<a href="%1$s">%2$s</a>',
-              esc_url( $edit_link ),
-              esc_html( __( 'Edit', 'contact-form-7' ) )
-            );
-
-            $actions['trash'] = sprintf(
-              '<a href="%1$s">%2$s</a>',
-              admin_url( 'post.php?post=' . $post->ID . '&action=trash&_wpnonce=' . $nonce ),
-              esc_html( __( 'Trash', 'contact-form-7' ) )
-            );
-
+            /** @since 3.0.0 removed edit/trash as taken care by WP core */
             $copy_link = wp_nonce_url(
               add_query_arg( array( 'action' => 'cf7copy' ), $url ),
               'wpcf7-copy-contact-form_' . absint( $form->id() )
@@ -360,7 +358,7 @@ if(!class_exists('Cf7_WP_Post_Table')){
             $actions['copy'] = sprintf(
               '<a href="%1$s">%2$s</a>',
               esc_url( $copy_link ),
-              esc_html( __( 'Duplicate', 'contact-form-7' ) )
+              esc_html( __cf7sg( 'Duplicate' ) )
             );
           }
         }
@@ -397,7 +395,7 @@ if(!class_exists('Cf7_WP_Post_Table')){
      * @return     string    echos the html fields.
     **/
     public function quick_edit_box( $column_name, $post_type ) {
-      if("wpcf7_contact_form" != $post_type){
+      if(self::cf7_post_type() != $post_type){
         return;
       }
       static $printNonce = TRUE;
@@ -432,7 +430,7 @@ if(!class_exists('Cf7_WP_Post_Table')){
       }
       //else get the post ID
       $form = get_posts(array(
-        'post_type' => 'wpcf7_contact_form',
+        'post_type' => self::cf7_post_type(),
         'name' => $a['cf7key']
       ));
       if(!empty($form)){
@@ -498,7 +496,7 @@ if(!class_exists('Cf7_WP_Post_Table')){
         'description'                => 'Contact Form 7 types',
     	);
 
-      register_taxonomy( $slug, WPCF7_ContactForm::post_type, $args );
+      register_taxonomy( $slug, self::cf7_post_type(), $args );
     }
     /**
     * Add a script to the admin table page to highlight form uddates.
@@ -509,7 +507,7 @@ if(!class_exists('Cf7_WP_Post_Table')){
     */
     public function update_form_highlight(){
       $screen = get_current_screen();
-      if (!isset($screen) || 'wpcf7_contact_form' != $screen->post_type){
+      if (!isset($screen) || self::cf7_post_type() != $screen->post_type){
         return;
       }
       switch( $screen->base ){

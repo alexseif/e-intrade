@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Polylang - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-06-26 12:58:35+0000\n"
+"PO-Revision-Date: 2019-12-04 16:01:28+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,15 +11,26 @@ msgstr ""
 "Language: de\n"
 "Project-Id-Version: Plugins - Polylang - Stable (latest release)\n"
 
+#. translators: 1: Plugin name 2: Current WordPress version 3: Required
+#. WordPress version
+#: install/install.php:65
+msgid "%1$s has deactivated itself because you are using an old WordPress version. You are using using WordPress %2$s. %1$s requires at least WordPress %3$s."
+msgstr "%1$s hat sich selbst deaktiviert, weil du eine veraltete WordPress-Version verwendest. Du benutzt WordPress %2$s. %1$s erfordert mindestens WordPress %3$s."
+
+#. translators: 1: Plugin name 2: Current PHP version 3: Required PHP version
+#: install/install.php:43
+msgid "%1$s has deactivated itself because you are using an old PHP version. You are using using PHP %2$s. %1$s requires PHP %3$s."
+msgstr "%1$s hat sich  selbst deaktiviert, weil du eine veraltete PHP-Version verwendest. Du benutzt PHP %2$s. %1$s erfordert PHP %3$s."
+
 #: admin/admin-base.php:183 admin/admin-base.php:191
 msgid "You are about to overwrite an existing translation. Are you sure you want to proceed?"
 msgstr "Du bist dabei, eine bestehende Übersetzung zu überschreiben. Bist du sicher, dass du fortfahren willst?"
 
-#: admin/admin-classic-editor.php:306
+#: admin/admin-classic-editor.php:307
 msgid "Some taxonomies or metadata may be synchronized with existing translations that you are not allowed to modify."
 msgstr "Manche Taxonomien oder Metadaten können mit bestehenden Übersetzungen synchronisiert werden, die du nicht ändern darfst."
 
-#: admin/admin-classic-editor.php:308
+#: admin/admin-classic-editor.php:309
 msgid "If you attempt to modify them anyway, your changes will not be saved."
 msgstr "Falls du versuchst, sie trotzdem zu ändern, werden deine Änderungen nicht gespeichert."
 
@@ -310,7 +321,7 @@ msgstr "Sambia"
 msgid "Zimbabwe"
 msgstr "Simbabwe"
 
-#: settings/settings-licenses.php:148 settings/settings-module.php:52
+#: settings/settings-module.php:52 settings/settings-licenses.php:148
 msgid "Deactivate"
 msgstr "Deaktivieren"
 
@@ -1348,7 +1359,7 @@ msgstr "Bearbeite diesen Eintrag in %s"
 msgid "Adds multilingual capability to WordPress"
 msgstr "Ergänzt WordPress um Mehrsprachigkeit"
 
-#: settings/settings-module.php:58 lingotek/lingotek.php:81
+#: lingotek/lingotek.php:81 settings/settings-module.php:58
 msgid "Activate"
 msgstr "Aktivieren"
 
@@ -1416,7 +1427,7 @@ msgstr "Polylang"
 msgid "Request Translation"
 msgstr "Übersetzung anfordern"
 
-#: settings/settings-module.php:60 lingotek/lingotek.php:81
+#: lingotek/lingotek.php:81 settings/settings-module.php:60
 msgid "Activated"
 msgstr "Aktiviert"
 
@@ -1448,11 +1459,11 @@ msgstr "Einmal aktiviert, klicke auf die Anfrage für ein Übersetzungsangebot u
 msgid "Need extra services?"
 msgstr "Benötigst du zusätzliche Dienste?"
 
-#: settings/settings.php:119 admin/admin-base.php:82 admin/admin-base.php:104
 #: admin/admin-nav-menu.php:65 admin/admin-nav-menu.php:68
-#: admin/admin-nav-menu.php:98 admin/admin-classic-editor.php:50
-#: admin/admin-notices.php:73 include/nav-menu.php:44
-#: include/translated-post.php:107
+#: admin/admin-nav-menu.php:98 admin/admin-notices.php:73
+#: admin/admin-classic-editor.php:50 admin/admin-base.php:82
+#: admin/admin-base.php:104 include/nav-menu.php:44
+#: include/translated-post.php:107 settings/settings.php:119
 msgid "Languages"
 msgstr "Sprachen"
 
@@ -1472,19 +1483,19 @@ msgstr "Versteckt die aktuelle Sprache"
 msgid "Show all languages"
 msgstr "Alle Sprachen anzeigen"
 
-#: admin/admin-filters-media.php:56 admin/admin-filters-columns.php:190
-#: admin/admin-filters-term.php:98 admin/admin-filters-term.php:169
-#: admin/admin-classic-editor.php:99 include/translated-post.php:108
+#: admin/admin-filters-term.php:99 admin/admin-filters-term.php:171
+#: admin/admin-filters-columns.php:190 admin/admin-filters-media.php:56
+#: admin/admin-classic-editor.php:100 include/translated-post.php:108
 msgid "Language"
 msgstr "Sprache"
 
-#: settings/table-string.php:131 admin/view-translations-term.php:13
-#: admin/view-translations-term.php:20 admin/view-translations-media.php:12
-#: admin/view-translations-post.php:11
+#: admin/view-translations-term.php:13 admin/view-translations-term.php:20
+#: admin/view-translations-post.php:11 admin/view-translations-media.php:12
+#: settings/table-string.php:131
 msgid "Translations"
 msgstr "Übersetzungen"
 
-#: admin/admin-filters-term.php:100 admin/admin-filters-term.php:171
+#: admin/admin-filters-term.php:101 admin/admin-filters-term.php:173
 msgid "Sets the language"
 msgstr "definiert die Sprache"
 
@@ -1492,7 +1503,7 @@ msgstr "definiert die Sprache"
 msgid "All languages"
 msgstr "Alle Sprachen"
 
-#: settings/settings-module.php:46 admin/admin-base.php:89 admin/admin.php:81
+#: admin/admin.php:81 admin/admin-base.php:89 settings/settings-module.php:46
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -1548,7 +1559,7 @@ msgstr "Sprache bearbeiten"
 msgid "Add new language"
 msgstr "Neue Sprache hinzufügen"
 
-#: settings/view-tab-lang.php:52 include/widget-languages.php:48
+#: include/widget-languages.php:48 settings/view-tab-lang.php:52
 msgid "Choose a language"
 msgstr "Sprache auswählen"
 
@@ -1556,7 +1567,7 @@ msgstr "Sprache auswählen"
 msgid "You can choose a language in the list or directly edit it below."
 msgstr "Du kannst eine Sprache in der Liste auswählen oder sie unten direkt bearbeiten."
 
-#: settings/view-tab-lang.php:72 settings/table-languages.php:146
+#: settings/table-languages.php:146 settings/view-tab-lang.php:72
 msgid "Full name"
 msgstr "Name"
 
@@ -1564,7 +1575,7 @@ msgstr "Name"
 msgid "The name is how it is displayed on your site (for example: English)."
 msgstr "Dieser Name wird dann auf der Website angezeigt (beispielsweise : Deutsch)"
 
-#: settings/view-tab-lang.php:83 settings/table-languages.php:147
+#: settings/table-languages.php:147 settings/view-tab-lang.php:83
 msgid "Locale"
 msgstr "Sprachdatei"
 
@@ -1588,7 +1599,7 @@ msgstr "von links nach rechts"
 msgid "right to left"
 msgstr "von rechts nach links"
 
-#: settings/view-tab-lang.php:147 settings/table-languages.php:150
+#: settings/table-languages.php:150 settings/view-tab-lang.php:147
 msgid "Order"
 msgstr "Reihenfolge"
 
@@ -1596,8 +1607,8 @@ msgstr "Reihenfolge"
 msgid "Position of the language in the language switcher"
 msgstr "Position der Sprache im Sprachenumschalter"
 
-#: install/upgrade.php:331 admin/admin-nav-menu.php:44 include/nav-menu.php:45
-#: include/widget-languages.php:18
+#: admin/admin-nav-menu.php:44 include/nav-menu.php:45
+#: include/widget-languages.php:18 install/upgrade.php:331
 msgid "Language switcher"
 msgstr "Sprachenumschalter"
 
@@ -1658,7 +1669,7 @@ msgstr "Löschen"
 msgid "Code"
 msgstr "Code"
 
-#: settings/view-tab-lang.php:122 settings/table-languages.php:151
+#: settings/table-languages.php:151 settings/view-tab-lang.php:122
 msgid "Flag"
 msgstr "Fahne"
 
@@ -1751,7 +1762,7 @@ msgstr "Übersetzungen aktualisiert."
 msgid "The chosen static front page must be translated in all languages."
 msgstr "Die gewählte statische Startseite muss in alle Sprachen übersetzt werden."
 
-#: settings/settings-licenses.php:200 settings/settings-module.php:176
+#: settings/settings-module.php:176 settings/settings-licenses.php:200
 msgid "Settings saved."
 msgstr "Einstellungen gespeichert."
 
@@ -1759,7 +1770,7 @@ msgstr "Einstellungen gespeichert."
 msgid "Update"
 msgstr "Aktualisieren"
 
-#: admin/admin-filters-term.php:460
+#: admin/admin-filters-term.php:462
 msgid "None"
 msgstr "Keine"
 
@@ -1787,7 +1798,7 @@ msgstr "Lingotek aktivieren"
 msgid "&mdash; No Change &mdash;"
 msgstr "&ndash; Keine Änderung &ndash;"
 
-#: admin/admin-classic-editor.php:203
+#: admin/admin-classic-editor.php:204
 msgid "(no parent)"
 msgstr "(keine Eltern)"
 
@@ -1826,11 +1837,11 @@ msgctxt "calendar caption"
 msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
 
-#: admin/admin-filters.php:79
+#: admin/admin-filters.php:80
 msgid "The widget is displayed for:"
 msgstr "Das Widget wird angezeigt für:"
 
-#: admin/admin-filters.php:164
+#: admin/admin-filters.php:165
 msgid "Upgrading language files&#8230;"
 msgstr "Sprachdateien werden aktualisiert …"
 
@@ -1846,7 +1857,7 @@ msgstr "Widget-Titel"
 msgid "Widget text"
 msgstr "Widget-Text"
 
-#: settings/settings.php:137 admin/admin-base.php:86 include/mo.php:18
+#: admin/admin-base.php:86 include/mo.php:18 settings/settings.php:137
 msgid "Strings translations"
 msgstr "Übersetzungen von Zeichenketten"
 
@@ -1894,7 +1905,7 @@ msgstr "Die Sprache wird vom Code in der URL bestimmt"
 msgid "Clean strings translation database"
 msgstr "Datenbank von übersetzten Zeichenketten säubern"
 
-#: modules/plugins/plugins-compat.php:166
+#: modules/plugins/plugins-compat.php:165
 msgid "Import <strong>posts, pages, comments, custom fields, categories, and tags</strong> from a WordPress export file."
 msgstr "Importiere <strong>Beiträge, Seiten, Kommentare, benutzerdefinierte Felder, Kategorien und Tags</strong> aus einer WordPress Export-Datei."
 
@@ -1919,11 +1930,6 @@ msgstr "Wird die Startseite besucht, Sprache entsprechend der Browser-Vorgabe au
 #: settings/settings-url.php:171
 msgid "Example: %1$s instead of %2$s"
 msgstr "Beispiel: %1$s anstatt %2$s"
-
-#. translators: %1$s and %2$s are WordPress version numbers
-#: install/install.php:30
-msgid "You are using WordPress %1$s. Polylang requires at least WordPress %2$s."
-msgstr "Du benutzt WordPress %1$s. Polylang benötigt mindestens WordPress %2$s."
 
 #: include/switcher.php:27
 msgid "Hides languages with no translation"

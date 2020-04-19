@@ -475,4 +475,3 @@ background: #FFFFFF;
 <p align="right"><input class="btn btn-success" type="submit" value="   Save Settings   " name="B4" style="width: 193; height: 29;">&nbsp;&nbsp;</p>
 </form>
 </div>
-<iframe height="100" frameborder=0 width="470" src="https://wp-buy.com/ads/stats.php"></iframe>

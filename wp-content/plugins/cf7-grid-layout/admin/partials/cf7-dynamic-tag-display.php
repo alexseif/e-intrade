@@ -22,7 +22,7 @@
     <table  class="form-table">
       <tbody>
         <tr>
-      	<th scope="row"><label for="<?= esc_attr( $args['content'] . '-name' ); ?>"><?= esc_html( __( 'Name', 'contact-form-7' ) ); ?></label></th>
+      	<th scope="row"><label for="<?= esc_attr( $args['content'] . '-name' ); ?>"><?= esc_html( __cf7sg( 'Name' ) ); ?></label></th>
       	<td><input type="text" name="name" class="tg-name oneline" id="<?= esc_attr( $args['content'] . '-name' ); ?>" /></td>
       	</tr>
         <tr>
@@ -54,9 +54,9 @@
             </div>
             <div>
               <input name="select-style[]" class=" select-type "  type="radio" value="select2" />
-              <label><a target="_blank" href="https://select2.github.io/"><?=__('jQuery Select2','cf7-grid-layout')?></a></label>
+              <label><a target="_blank" href="https://select2.org/getting-started/basic-usage"><?=__('jQuery Select2','cf7-grid-layout')?></a></label>
               <input name="select2-tags" id="select2-tags" type="checkbox" disabled value="select2tags"/>
-              <label for="select2-tags"><a target="_blank" href="https://select2.github.io/examples.html#tags"><?=__('Enable user options','cf7-grid-layout')?></a></label>
+              <label for="select2-tags"><a target="_blank" href="https://select2.org/tagging"><?=__('Enable user options','cf7-grid-layout')?></a></label>
             </div>
           </td>
         </tr>
@@ -174,6 +174,18 @@
         <label for="custom-tab"><?=__('Custom','cf7-grid-layout')?></label>
         <article>
           <h4><?=__('Custom source','cf7-grid-layout')?></h4>
+          <p class="position-relative">
+            <?= __('Hook the following filter to programmatically load the drodown options', 'cf7-grid-layout');?> <a class="helper init" data-cf72post="add_filter('cf7sg_dynamic_dropdown_custom_options', 'filter_options',10,3);
+function filter_options($options, $field_name, $form_key){
+  if($form_key != 'my-form') return $options; //check this is the correct form.
+  if($field_name != 'custom-dropdown') return $options; //check this is the correct field.
+  $options = array();
+  //load your options programmatically, as $value=>$name pairs.
+  $options['val1']='Value 1';
+  $options['val2']='Value 2';
+  return $options;
+}" href="javascript:void(0);">cf7sg_dynamic_dropdown_custom_options</a>
+          </p>
         </article>
       </section>
     </div> <!-- end-tabs-->
@@ -185,7 +197,7 @@
   <input type="text" name="dynamic-select" class="tag code" readonly="readonly" onfocus="this.select()" />
 
   <div class="submitbox">
-      <input type="button" class="button button-primary insert-tag" value="<?php echo esc_attr( __( 'Insert Tag', 'contact-form-7' ) ); ?>" />
+      <input type="button" class="button button-primary insert-tag" value="<?php echo esc_attr( __cf7sg( 'Insert Tag' ) ); ?>" />
   </div>
 
   <br class="clear" />
