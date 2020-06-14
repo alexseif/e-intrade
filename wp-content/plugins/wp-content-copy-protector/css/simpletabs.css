@@ -7,7 +7,7 @@
  */
  
 div.simpleTabs { padding:10px; }
-ul.simpleTabsNavigation { margin:0 0px; padding:0; text-align:left; line-height: 2.4em; }
+ul.simpleTabsNavigation { margin:0 0px; padding:0; line-height: 2.4em; }
 ul.simpleTabsNavigation li { list-style:none; display:inline; margin:0; padding:0; }
 ul.simpleTabsNavigation li a {border-radius: 3px 12px 0 0;
 border:1px solid #E0E0E0;

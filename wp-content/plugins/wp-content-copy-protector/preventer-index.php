@@ -1,10 +1,12 @@
-<?php ob_start();
+<?php
 /*
 Plugin Name: WP Content Copy Protection & No Right Click
 Plugin URI: http://wordpress.org/plugins/w-p-content-copy-protector/
 Description: This wp plugin protect the posts content from being copied by any other web site author , you dont want your content to spread without your permission!!
-Version: 1.7.3
+Version: 2.3
 Author: wp-buy
+Text Domain: wp-content-copy-protector
+Domain Path: /languages
 Author URI: http://www.wp-buy.com/
 */
 ?>
@@ -12,9 +14,15 @@ Author URI: http://www.wp-buy.com/
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 //define all variables the needed alot
 include 'the_globals.php';
-
-
+include_once('notifications.php');
 $wccp_settings = wccp_read_options();
+//---------------------------------------------------------------------------------------------
+//Load plugin textdomain to load translations
+//---------------------------------------------------------------------------------------------
+function wccp_free_load_textdomain() {
+  load_plugin_textdomain( 'wp-content-copy-protector', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' ); 
+}
+add_action( 'init', 'wccp_free_load_textdomain' );
 //---------------------------------------------------------<!-- SimpleTabs -->
 function wccp_enqueue_scripts() {
 	global $pluginsurl;
@@ -64,6 +72,15 @@ var image_save_msg='You Can Not Save images!';
 
 function disableEnterKey(e)
 {
+	var elemtype = e.target.tagName;
+	
+	elemtype = elemtype.toUpperCase();
+	
+	if (elemtype == "TEXT" || elemtype == "TEXTAREA" || elemtype == "INPUT" || elemtype == "PASSWORD" || elemtype == "SELECT" || elemtype == "OPTION" || elemtype == "EMBED")
+	{
+		elemtype = 'TEXT';
+	}
+	
 	if (e.ctrlKey){
      var key;
      if(window.event)
@@ -71,7 +88,7 @@ function disableEnterKey(e)
      else
           key = e.which;     //firefox (97)
     //if (key != 17) alert(key);
-     if (key == 97 || key == 65 || key == 67 || key == 99 || key == 88 || key == 120 || key == 26 || key == 85  || key == 86 || key == 83 || key == 43)
+     if (elemtype!= 'TEXT' && (key == 97 || key == 65 || key == 67 || key == 99 || key == 88 || key == 120 || key == 26 || key == 85  || key == 86 || key == 83 || key == 43))
      {
           show_wpcp_message('You are not allowed to copy content or view source');
           return false;
@@ -80,14 +97,22 @@ function disableEnterKey(e)
      }
 }
 
+//////////////////////////////////////////////////////////////////////////////////////
 function disable_copy(e)
 {	
-	var elemtype = e.target.nodeName;
-	var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+	var elemtype = e.target.tagName;
+	
 	elemtype = elemtype.toUpperCase();
+	
+	if (elemtype == "TEXT" || elemtype == "TEXTAREA" || elemtype == "INPUT" || elemtype == "PASSWORD" || elemtype == "SELECT" || elemtype == "OPTION" || elemtype == "EMBED")
+	{
+		elemtype = 'TEXT';
+	}
+	var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+	
 	var checker_IMG = '<?php echo $wccp_settings['img'];?>';
 	if (elemtype == "IMG" && checker_IMG == 'checked' && e.detail >= 2) {show_wpcp_message(alertMsg_IMG);return false;}
-	if (elemtype != "TEXT" && elemtype != "TEXTAREA" && elemtype != "INPUT" && elemtype != "PASSWORD" && elemtype != "SELECT" && elemtype != "OPTION" && elemtype != "EMBED")
+	if (elemtype != "TEXT")
 	{
 		if (smessage !== "" && e.detail == 2)
 			show_wpcp_message(smessage);
@@ -98,6 +123,8 @@ function disable_copy(e)
 			return false;
 	}	
 }
+
+//////////////////////////////////////////////////////////////////////////////////////
 function disable_copy_ie()
 {
 	var elemtype = window.event.srcElement.nodeName;
@@ -105,8 +132,6 @@ function disable_copy_ie()
 	if (elemtype == "IMG") {show_wpcp_message(alertMsg_IMG);return false;}
 	if (elemtype != "TEXT" && elemtype != "TEXTAREA" && elemtype != "INPUT" && elemtype != "PASSWORD" && elemtype != "SELECT" && elemtype != "OPTION" && elemtype != "EMBED")
 	{
-		//alert(navigator.userAgent.indexOf('MSIE'));
-			//if (smessage !== "") show_wpcp_message(smessage);
 		return false;
 	}
 }	
@@ -507,7 +532,7 @@ function wpccp_after_plugin_row( $plugin_file, $plugin_data, $status ) {
 		echo '<th class="check-column" scope="row"></th>';
 		echo '<td colspan="3" class="plugin-update">';
 		echo '<div id="wccp-update-message" style="background:#edf4f7;padding:10px;" >';
-		echo 'You are running WP Content Copy Protection & No Right Click (free). To get more features, you can <a href="' .$p_url. '" target="_blank"><strong>Upgrade Now</strong></a>,    <a id="HideMe" href="javascript:void(0)"><strong>Dismiss</strong></a>.';
+		echo __('You are running WP Content Copy Protection & No Right Click (free). To get more features, you can ') . '<a href="' .$p_url. '" target="_blank"><strong>' . __('Upgrade Now') . '</strong></a>,    <a id="HideMe" href="javascript:void(0)"><strong>' . __('Dismiss') . '</strong></a>.';
 		echo '</div>';
 		echo '</td>';
 		echo '</tr>';
@@ -548,7 +573,7 @@ add_action("after_plugin_row_{$path}", "wpccp_after_plugin_row", 10, 3 );
 //------------------------------------------------------------------------
 //Make our function to call the WordPress function to add to the correct menu.
 function wccp_add_options() {
-	add_options_page('WP Content Copy Protection', 'WP Content Copy Protection', 'manage_options', 'wccpoptionspro', 'wccp_options_page_pro');
+	add_options_page(__('WP Content Copy Protection', 'wp-content-copy-protector'), __('WP Content Copy Protection', 'wp-content-copy-protector'), 'manage_options', 'wccpoptionspro', 'wccp_options_page_pro');
 }
 //First use the add_action to add onto the WordPress menu.
 add_action('admin_menu', 'wccp_add_options');

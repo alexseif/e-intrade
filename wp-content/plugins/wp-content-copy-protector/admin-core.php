@@ -6,6 +6,7 @@ if ( !current_user_can('edit_others_pages') ) { //protection for admin content
 <?php
 //define all variables the needed alot
 include 'the_globals.php';
+include 'notifications.php';
 $post_action = '';
 if(isset($_POST["action"])) $post_action = sanitize_text_field($_POST["action"]);
 if($post_action == 'update')
@@ -80,7 +81,7 @@ if($post_action == 'update')
 			'right_click_protection_homepage' => $right_click_protection_homepage, //
 			'right_click_protection_pages' => $right_click_protection_pages, //
 			'home_css_protection' => $home_css_protection, // premium option
-			'posts_css_protection' => 'No', // premium option
+			'posts_css_protection' => $posts_css_protection, // premium option (unlocked and become free option)
 			'pages_css_protection' => 'No', // premium option
 			'exclude_admin_from_protection' => 'No', // premium option
 			'img' => '', // premium option
@@ -116,8 +117,6 @@ if($post_action == 'update')
 ?>
 <style>
 #aio_admin_main {
-text-align:left;
-direction:ltr;
 padding:10px;
 margin: 10px;
 background-color: #ffffff;
@@ -161,116 +160,145 @@ div.simpleTabsContent{
     min-height: 400px;
     padding: 5px 15px 15px;
 }
-html {
-background: #FFFFFF;
-}
+
 .size-full {
     height: auto;
     max-width: 100%;
 }
 </style>
+<div id="wpccp_subscribe" class="notice notice-info is-dismissible">
+<?php $admin_email_wccp = get_bloginfo("admin_email");  ?>
+<table  style="background-image:url(<?php echo $pluginsurl ?>/images/ad.png);background-repeat:no-repeat;" border="0" width="100%" cellspacing="0" cellpadding="0">
+	<tr>
+		<td><h2 style="background-color:#FFFFFF;padding:3px;" class="alert-heading"><?php _e("WP Content Protection Plugin Group", 'wp-content-copy-protector') ?></h2></td>
+		<td rowspan="2">
+		<p align="center"><a href="#" onclick="wpccp_dismiss_notice()"><?php _e('Dismiss', 'wp-content-copy-protector'); ?> </a></td>
+	</tr>
+	<tr>
+		<td style="padding-left: 77px;">
+			<h4>
+			<?php echo __("Begin your adventure to improve your WordPress website, Also you will win a ", 'wp-content-copy-protector') . ' <b style="color:red">' . __("discount codes" , 'wp-content-copy-protector') . '</b>'; ?>
+			<input type="text" id="admin_email_wccp" name= "admin_email_wccp" value="<?php echo $admin_email_wccp; ?>" />
+			<button type="button" class="btn btn-primary wpccp_subscribe_btn" onclick='wpccp_open_subscribe_page();'> <?php _e("Start it!", 'wp-content-copy-protector'); ?> </button>
+			</h4>
+		</td>
+	</tr>
+</table>
+</div>
+<script>
+function wpccp_dismiss_notice()
+	{
+		localStorage.setItem('wpccp_subscribed', 'wpccp_subsbc_user');
+		document.getElementById("wpccp_subscribe").style.display="none";
+	}
+
+function wpccp_open_subscribe_page()
+	{
+		if(localStorage.getItem('wpccp_subscribed') !='wpccp_subsbc_user')
+		{
+			var admin_email_wccp = document.getElementById('admin_email_wccp').value;
+		window.open('https://www.wp-buy.com/wpccp-subscribe/?email='+admin_email_wccp,'_blank');
+		}
+	}
+
+if(localStorage.getItem('wpccp_subscribed') =='wpccp_subsbc_user')
+	{
+		 document.getElementById("wpccp_subscribe").style.display="none";
+	}
+</script>
 <div id="aio_admin_main">
 <form method="POST">
 <input type="hidden" value="update" name="action">
 <div class="simpleTabs">
 <ul class="simpleTabsNavigation">
-    <li><a href="#">Main Settings</a></li>
-	<li><a href="#">Premium RightClick Protection</a></li>
-	<li><a href="#">Premium Protection by CSS</a></li>
-    <li><a href="#">More with pro</a></li>
+    <li><a href="#"><?php _e('Main Settings','wp-content-copy-protector'); ?></a></li>
+	<li><a href="#"><?php _e('Premium RightClick Protection','wp-content-copy-protector'); ?></a></li>
+	<li><a href="#"><?php _e('Premium Protection by CSS','wp-content-copy-protector'); ?></a></li>
+    <li><a href="#"><?php _e('More with pro','wp-content-copy-protector'); ?></a></li>
+	<li><a href="#"><?php _e('Other products','wp-content-copy-protector'); ?></a></li>
 </ul>
 <div class="simpleTabsContent">
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
 	<tr>
 		<td width="77%">
-	<h4>Copy Protection using JavaScript (<font color="#008000">Basic Layer</font>):</h4>
-	<p><font face="Tahoma" size="2">This is the basic protection layer that uses
-	<u>JavaScript</u> to protect the posts, home page content from being copied by any other 
-	web site author.</font></p>
+	<h4><?php _e('Copy Protection using JavaScript','wp-content-copy-protector'); ?> (<font color="#008000"><?php _e('Basic Layer','wp-content-copy-protector'); ?></font>):</h4>
+	<p><font face="Tahoma" size="2"><?php _e('This is the basic protection layer that uses <u>JavaScript</u> to protect the posts, home page content from being copied by any other web site author.','wp-content-copy-protector'); ?></font></p>
 		<table border="0" width="100%" cellspacing="0" cellpadding="0">
 			<tr>
 				<td width="60%">
-	<div style="float: left;padding: 4px" id="layer3">
+	<div style="float: auto;padding: 4px" id="layer3">
 		<table border="0" width="100%" height="320" cellspacing="0" cellpadding="0">
 			<tr>
-				<td width="221" height="33"><font face="Tahoma" size="2">Posts protection 
-				by 
-	<u>JavaScript</u></font></td>
+				<td width="221" height="33"><font face="Tahoma" size="2"><?php _e('Posts protection by <u>JavaScript</u>','wp-content-copy-protector'); ?></font></td>
 				<td>
 				<select size="1" name="single_posts_protection">
 				<?php 
 				if ($wccp_settings['single_posts_protection'] == 'Enabled')
 					{
-						echo '<option selected>Enabled</option>';
-						echo '<option>Disabled</option>';
+						echo '<option selected value="Enabled">'. __('Enabled','wp-content-copy-protector') .'</option>';
+						echo '<option value="Disabled">'. __('Disabled','wp-content-copy-protector') .'</option>';
 					}
 					else
 					{
-						echo '<option>Enabled</option>';
-						echo '<option selected>Disabled</option>';
+						echo '<option value="Enabled">'. __('Enabled','wp-content-copy-protector') .'</option>';
+						echo '<option selected value="Disabled">'. __('Disabled','wp-content-copy-protector') .'</option>';
 					}
 				?>
 				</select>
 				</td>
-				<td align="left">
-				<p><font face="Tahoma" size="2">&nbsp;For single posts content</font></p></td>
+				<td>
+				<p><font face="Tahoma" size="2"><?php _e('For single posts content','wp-content-copy-protector'); ?></font></p></td>
 			</tr>
 			<tr>
-				<td width="221" height="33"><font face="Tahoma" size="2">Homepage 
-				protection 
-				by 
-	<u>JavaScript</u></font></td>
+				<td width="221" height="33"><font face="Tahoma" size="2"><?php _e('Homepage protection by <u>JavaScript</u>','wp-content-copy-protector'); ?></font></td>
 				<td>
 				<select size="1" name="home_page_protection">
 				<?php 
 				if ($wccp_settings['home_page_protection'] == 'Enabled')
 					{
-						echo '<option selected>Enabled</option>';
-						echo '<option>Disabled</option>';
+						echo '<option selected value="Enabled">'. __('Enabled','wp-content-copy-protector') .'</option>';
+						echo '<option value="Disabled">'. __('Disabled','wp-content-copy-protector') .'</option>';
 					}
 					else
 					{
-						echo '<option>Enabled</option>';
-						echo '<option selected>Disabled</option>';
+						echo '<option value="Enabled">'. __('Enabled','wp-content-copy-protector') .'</option>';
+						echo '<option selected value="Disabled">'. __('Disabled','wp-content-copy-protector') .'</option>';
 					}
 				?>
 				</select>
 				</td>
-				<td align="left">
-				<p><font face="Tahoma" size="2">&nbsp;Don't copy any thing! 
-				even from my homepage</font></td>
+				<td>
+				<p><font face="Tahoma" size="2"><?php _e('Don\'t copy any thing! even from my homepage','wp-content-copy-protector'); ?></font></td>
 			</tr>
 			<tr>
-				<td width="221" height="33"><font face="Tahoma" size="2">Static page's protection</font></td>
+				<td width="221" height="33"><font face="Tahoma" size="2"><?php _e('Static page\'s protection','wp-content-copy-protector'); ?></font></td>
 				<td>
 				<select size="1" name="page_protection">
 				<?php 
 				if ($wccp_settings['page_protection'] == 'Enabled')
 					{
-						echo '<option selected>Enabled</option>';
-						echo '<option>Disabled</option>';
+						echo '<option selected value="Enabled">'. __('Enabled','wp-content-copy-protector') .'</option>';
+						echo '<option value="Disabled">'. __('Disabled','wp-content-copy-protector') .'</option>';
 					}
 					else
 					{
-						echo '<option selected>Disabled</option>';
-						echo '<option>Enabled</option>';
+						echo '<option selected value="Disabled">'. __('Disabled','wp-content-copy-protector') .'</option>';
+						echo '<option value="Enabled">'. __('Enabled','wp-content-copy-protector') .'</option>';
 					}
 				?>
 				</select></td>
-				<td align="left">
-				<p><font face="Tahoma" size="2">&nbsp;Use Premium Settings tab to customize more options</font></td>
-			</tr>
-			<tr>
-				<td width="221" height="33"><font face="Tahoma" size="2">Exclude 
-				<u>Admin</u> from protection</font></td>
 				<td>
-				<p align="center"><font color="#FF0000">Premium</font></td>
-				<td align="left">
-				<font face="Tahoma" size="2">&nbsp;If <u>Yes</u>, The protection 
-				functions will be inactive for the admin when he is logged in</font></td>
+				<p><font face="Tahoma" size="2"><?php _e('Use Premium Settings tab to customize more options','wp-content-copy-protector'); ?></font></td>
 			</tr>
 			<tr>
-				<td width="221" height="33"><font face="Tahoma" size="2">Selection disabled message</font></td>
+				<td width="221" height="33"><font face="Tahoma" size="2"><?php _e('Exclude <u>Admin</u> from protection','wp-content-copy-protector'); ?></font></td>
+				<td width="88px">
+				<p align="center"><font color="#FF0000"><?php _e('Premium','wp-content-copy-protector'); ?></font></td>
+				<td>
+				<font face="Tahoma" size="2"><?php _e('If <u>Yes</u>, The protection functions will be inactive for the admin when he is logged in','wp-content-copy-protector'); ?></font></td>
+			</tr>
+			<tr>
+				<td width="221" height="33"><font face="Tahoma" size="2"><?php _e('Selection disabled message','wp-content-copy-protector'); ?></font></td>
 				<td colspan="2">
 				<table border="0" width="59%" cellspacing="0" cellpadding="0">
 					<tr>
@@ -281,7 +309,7 @@ background: #FFFFFF;
 				</td>
 			</tr>
 			<tr>
-				<td width="221" height="33"><font face="Tahoma" size="2">Print preview message</font></td>
+				<td width="221" height="33"><font face="Tahoma" size="2"><?php _e('Print preview message','wp-content-copy-protector'); ?></font></td>
 				<td colspan="2">
 				<table border="0" width="99%" cellspacing="0" cellpadding="0">
 					<tr>
@@ -299,37 +327,31 @@ background: #FFFFFF;
 	</tr>
 </table></div>
 <div class="simpleTabsContent">
-	<h4>Copy Protection on RightClick (<font color="#008000">Premium Layer 2</font>):</h4>
-	<p><font face="Tahoma" size="2">In this protection layer your visitors will 
-	be able to <u>right click</u> on a specific page elements only (such as 
-	Links as an example)</font></p>
+	<h4><?php _e('Copy Protection on RightClick','wp-content-copy-protector'); ?> (<font color="#008000"><?php _e('Premium Layer 2','wp-content-copy-protector'); ?></font>):</h4>
+	<p><font face="Tahoma" size="2"><?php _e('In this protection layer your visitors will be able to <u>right click</u> on a specific page elements only (such as Links as an example)','wp-content-copy-protector'); ?></font></p>
 	<div id="layer4">
 		<table border="0" width="100%" height="361" cellspacing="0" cellpadding="0">
 			<tr>
-				<td height="53" width="21%"><font face="Tahoma" size="2">Disable <u>RightClick</u> on</font></td>
+				<td height="53" width="21%"><font face="Tahoma" size="2"><?php _e('Disable <u>RightClick</u> on','wp-content-copy-protector'); ?></font></td>
 				<td height="53">
 				<table border="0" width="521" height="100%" cellspacing="1" cellpadding="0">
 					<tr>
 						<td width="161" height="46">
 				<label class="checkbox" for="checkbox1">
 					<font face="Tahoma">
-					<input data-toggle="checkbox" type="checkbox" name="right_click_protection_posts" value="checked" <?php echo $wccp_settings['right_click_protection_posts']; ?>><font size="2">Posts
-						</font></font>
+					<input data-toggle="checkbox" type="checkbox" name="right_click_protection_posts" value="checked" <?php echo $wccp_settings['right_click_protection_posts']; ?>><font size="2"><?php _e('Posts','wp-content-copy-protector'); ?></font></font>
 						</label>
 						</td>
 						<td width="161" height="46">
 				<label class="checkbox" for="checkbox1">
 					<font face="Tahoma">
-					<input data-toggle="checkbox" type="checkbox" name="right_click_protection_homepage" value="checked" <?php echo $wccp_settings['right_click_protection_homepage']; ?>><font size="2">HomePage
-						</font></font>
+					<input data-toggle="checkbox" type="checkbox" name="right_click_protection_homepage" value="checked" <?php echo $wccp_settings['right_click_protection_homepage']; ?>><font size="2"><?php _e('HomePage','wp-content-copy-protector'); ?></font></font>
 						</label>
 						</td>
 						<td width="185" height="46">
 				<label class="checkbox" for="checkbox1">
 					<font face="Tahoma">
-					<input data-toggle="checkbox" type="checkbox" name="right_click_protection_pages" value="checked" <?php echo $wccp_settings['right_click_protection_pages']; ?>><font size="2">Static 
-				pages 
-				</font></font> 
+					<input data-toggle="checkbox" type="checkbox" name="right_click_protection_pages" value="checked" <?php echo $wccp_settings['right_click_protection_pages']; ?>><font size="2"><?php _e('Static pages','wp-content-copy-protector'); ?></font></font> 
 				</label>
 						</td>
 					</tr>
@@ -338,12 +360,11 @@ background: #FFFFFF;
 			</tr>
 			<tr>
 				<td height="44" colspan="2">
-				<p align="left"><font color="#FF0000" face="Tahoma" size="2">
-				Remaining premium options preview image </font>
+				<p><font color="#FF0000" face="Tahoma" size="2"><?php _e('Remaining premium options preview image ','wp-content-copy-protector'); ?></font>
 				<img src="<?php echo $pluginsurl ?>/images/click-here-arrow.png" id="irc_mi">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<b><font color="#0909FF"><u>
 				<a href="http://www.wp-buy.com/product/wp-content-copy-protection-pro/">
-				<font color="#0909FF">Preview &amp; Pricing</font></a></u></font></b>
+				<font color="#0909FF"><?php _e('Preview & Pricing','wp-content-copy-protector'); ?></font></a></u></font></b>
 				</td>
 			</tr>
 			<tr>
@@ -355,52 +376,61 @@ background: #FFFFFF;
 			</table></div>
 </div>
 <div class="simpleTabsContent">
-<h4>Protection by CSS Techniques (<font color="#008000">Premium Layer 3</font>):</h4>
-	<p><font face="Tahoma" size="2">In this protection layer your website will 
-	be protected by some <u>CSS</u> tricks that will word even if <u>JavaScript</u> 
-	is disabled from the browser settings</font></p>
+<h4><?php _e('Protection by CSS Techniques','wp-content-copy-protector'); ?> (<font color="#008000"><?php _e('Premium Layer 3','wp-content-copy-protector'); ?></font>):</h4>
+	<p><font face="Tahoma" size="2"><?php _e('In this protection layer your website will be protected by some <u>CSS</u> tricks that will word even if <u>JavaScript</u> is disabled from the browser settings','wp-content-copy-protector'); ?></font></p>
 	<table border="0" width="100%" cellspacing="0" cellpadding="0">
 			<tr>
 				<td width="60%">
-	<div style="float: left;padding: 4px" id="layer5">
+	<div style="float: auto;padding: 4px" id="layer5">
 		<table border="0" width="100%" height="232" cellspacing="0" cellpadding="0">
 			<tr>
-				<td width="221" height="74"><font face="Tahoma" size="2"><b>Home Page</b> Protection by CSS</font></td>
-				<td height="74">
+				<td width="221" height="74"><font face="Tahoma" size="2"><?php _e('<b>Home Page</b> Protection by CSS','wp-content-copy-protector'); ?></font></td>
+				<td height="74" width="90">
 				<select size="1" name="home_css_protection">
 				<?php 
 				if ($wccp_settings['home_css_protection'] == 'Enabled')
 					{
-						echo '<option selected>Enabled</option>';
-						echo '<option>Disabled</option>';
+						echo '<option selected value="Enabled">'. __('Enabled','wp-content-copy-protector') .'</option>';
+						echo '<option value="Disabled">'. __('Disabled','wp-content-copy-protector') .'</option>';
 					}
 					else
 					{
-						echo '<option>Enabled</option>';
-						echo '<option selected>Disabled</option>';
+						echo '<option value="Enabled">'. __('Enabled','wp-content-copy-protector') .'</option>';
+						echo '<option selected value="Disabled">'. __('Disabled','wp-content-copy-protector') .'</option>';
 					}
 				?>
 				</select>
 				</td>
-				<td align="left" height="74">
-				<font face="Tahoma" size="2">Protect your Homepage by CSS tricks</font></td>
+				<td height="74">
+				<font face="Tahoma" size="2"><?php _e('Protect your Homepage by CSS tricks','wp-content-copy-protector'); ?></font></td>
 			</tr>
 			<tr>
-				<td width="221" height="77"><font face="Tahoma" size="2"><b>Posts</b> Protection by CSS</font></td>
-				<td align="center">
-				<font color="#FF0000">Premium </font>
+				<td width="221" height="77"><font face="Tahoma" size="2"><?php _e('<b>Posts</b> Protection by CSS','wp-content-copy-protector'); ?></font></td>
+				<td width="90" align="center">
+				<select size="1" name="posts_css_protection">
+				<?php 
+				if ($wccp_settings['posts_css_protection'] == 'Enabled')
+					{
+						echo '<option selected value="Enabled">'. __('Enabled','wp-content-copy-protector') .'</option>';
+						echo '<option value="Disabled">'. __('Disabled','wp-content-copy-protector') .'</option>';
+					}
+					else
+					{
+						echo '<option value="Enabled">'. __('Enabled','wp-content-copy-protector') .'</option>';
+						echo '<option selected value="Disabled">'. __('Disabled','wp-content-copy-protector') .'</option>';
+					}
+				?>
+				</select>
 				</td>
-				<td align="left">
-				<font face="Tahoma" size="2">Protect your single posts by CSS tricks</font></td>
+				<td>
+				<font face="Tahoma" size="2"><?php _e('Protect your single posts by CSS tricks','wp-content-copy-protector'); ?></font> (Pro option - unlocked for free!!)</td>
 			</tr>
 			<tr>
-				<td width="221"><font face="Tahoma" size="2"><b>Pages</b> Protection by CSS</font></td>
-				<td align="center">
-				<font color="#FF0000">Premium&nbsp;
-				
-				</font>
+				<td width="221"><font face="Tahoma" size="2"><?php _e('<b>Pages</b> Protection by CSS','wp-content-copy-protector'); ?></font></td>
+				<td width="90" align="center">
+				<font color="#FF0000"><?php _e('Premium','wp-content-copy-protector'); ?></font>
 				</td>
-				<td align="left"><font face="Tahoma" size="2">Protect your static pages by CSS tricks</font></td>
+				<td><font face="Tahoma" size="2"><?php _e('Protect your static pages by CSS tricks','wp-content-copy-protector'); ?></font></td>
 			</tr>
 			</table></div>
 			</td>
@@ -422,56 +452,62 @@ background: #FFFFFF;
 		</a>
 		<p></p>
 		<p><b><font face="Tahoma" size="2" color="#FFFFFF">
-		<span style="background-color: #008000">Basic features:</span></font></b></p>
+		<span style="background-color: #008000"><?php _e('Basic features:','wp-content-copy-protector'); ?></span></font></b></p>
 		<ul>
-			<li><font style="font-size: 10pt" face="Tahoma">Protect your content 
-			from selection and copy. this plugin makes protecting your posts 
-			extremely simple without yelling at your readers</font></li>
-			<li><font style="font-size: 10pt" face="Tahoma">No one can save 
-			images from your site.</font></li>
-			<li><font style="font-size: 10pt" face="Tahoma">No right click or 
-			context menu.</font></li>
-			<li><font style="font-size: 10pt" face="Tahoma">Show alert message, 
-			Image Ad or HTML Ad on save images or right click.</font></li>
-			<li><font style="font-size: 10pt" face="Tahoma">Disable the 
-			following keys&nbsp; CTRL+A, CTRL+C, CTRL+X,CTRL+S or CTRL+V.</font></li>
-			<li><font style="font-size: 10pt" face="Tahoma">Advanced and easy to 
-			use control panel.</font></li>
-			<li><font style="font-size: 10pt" face="Tahoma">No one can right 
-			click images on your site if you want</font></li>
+			<li><font style="font-size: 10pt" face="Tahoma"><?php _e('Protect your content from selection and copy. this plugin makes protecting your posts extremely simple without yelling at your readers','wp-content-copy-protector'); ?></font></li>
+			<li><font style="font-size: 10pt" face="Tahoma"><?php _e('No one can save images from your site.','wp-content-copy-protector'); ?></font></li>
+			<li><font style="font-size: 10pt" face="Tahoma"><?php _e('No right click or context menu.','wp-content-copy-protector'); ?></font></li>
+			<li><font style="font-size: 10pt" face="Tahoma"><?php _e('Show alert message, Image Ad or HTML Ad on save images or right click.','wp-content-copy-protector'); ?></font></li>
+			<li><font style="font-size: 10pt" face="Tahoma"><?php _e('Disable the following keys','wp-content-copy-protector'); ?>  CTRL+A, CTRL+C, CTRL+X,CTRL+S or CTRL+V.</font></li>
+			<li><font style="font-size: 10pt" face="Tahoma"><?php _e('Advanced and easy to use control panel.','wp-content-copy-protector'); ?></font></li>
+			<li><font style="font-size: 10pt" face="Tahoma"><?php _e('No one can right click images on your site if you want','wp-content-copy-protector'); ?></font></li>
 		</ul>
 		<p><b><font face="Tahoma" size="2" color="#FFFFFF">
-		<span style="background-color: #5B2473">Premium features:</span></font></b></p>
+		<span style="background-color: #5B2473"><?php _e('Premium features:','wp-content-copy-protector'); ?></span></font></b></p>
 		<ul>
-			<li><font style="font-size: 10pt" face="Tahoma">Get full Control on 
-			Right click or context menu</font></li>
-			<li><font style="font-size: 10pt" face="Tahoma">Full watermarking</font></li>
-			<li><font style="font-size: 10pt" face="Tahoma">Show alert messages, 
-			when user made right click on images, text boxes, links, plain 
-			text.. etc</font></li>
-			<li><font style="font-size: 10pt" face="Tahoma">Admin can exclude 
-			Home page Or Single posts from being copy protected </font></li>
-			<li><font style="font-size: 10pt" face="Tahoma">Admin can disable 
-			copy protection for admin users.</font></li>
-			<li><font face="Tahoma" size="2">3 protection layers (JavaScript 
-			protection, RightClick protection, CSS protection)</font></li>
-			<li><font style="font-size: 10pt" face="Tahoma">Aggressive image 
-			protection (its near impossible for expert users to steal 
-			your images !!)</font></li>
-			<li><font style="font-size: 10pt" face="Tahoma">compatible with all 
-			major theme frameworks</font></li>
-			<li><font style="font-size: 10pt" face="Tahoma">compatible with all major browsers</font></li>
-			<li><font style="font-size: 10pt" face="Tahoma">Tested in IE9, IE10, 
-			Firefox, Google Chrome, Opera</font></li>
-			<li><font style="font-size: 10pt" face="Tahoma">Disables image drag 
-			and drop function</font></li>
-			<li><font style="font-size: 10pt" face="Tahoma">Works on smart 
-			phones.</font></li>
-			<li><font style="font-size: 10pt" face="Tahoma">Ability to set 
-			varying levels of protection per page or post.</font></li>
+			<li><font style="font-size: 10pt" face="Tahoma"><?php _e('Get full Control on Right click or context menu','wp-content-copy-protector'); ?></font></li>
+			<li><font style="font-size: 10pt" face="Tahoma"><?php _e('Full watermarking','wp-content-copy-protector'); ?></font></li>
+			<li><font style="font-size: 10pt" face="Tahoma"><?php _e('Show alert messages, when user made right click on images, text boxes, links, plain text.. etc','wp-content-copy-protector'); ?></font></li>
+			<li><font style="font-size: 10pt" face="Tahoma"><?php _e('Admin can exclude Home page Or Single posts from being copy protected ','wp-content-copy-protector'); ?></font></li>
+			<li><font style="font-size: 10pt" face="Tahoma"><?php _e('Admin can disable copy protection for admin users.','wp-content-copy-protector'); ?></font></li>
+			<li><font face="Tahoma" size="2"><?php _e('3 protection layers (JavaScript protection, RightClick protection, CSS protection)','wp-content-copy-protector'); ?></font></li>
+			<li><font style="font-size: 10pt" face="Tahoma"><?php _e('Aggressive image protection (its near impossible for expert users to steal your images !!)','wp-content-copy-protector'); ?></font></li>
+			<li><font style="font-size: 10pt" face="Tahoma"><?php _e('Compatible with all major theme frameworks','wp-content-copy-protector'); ?></font></li>
+			<li><font style="font-size: 10pt" face="Tahoma"><?php _e('Compatible with all major browsers','wp-content-copy-protector'); ?></font></li>
+			<li><font style="font-size: 10pt" face="Tahoma"><?php _e('Tested in IE9, IE10, Firefox, Google Chrome, Opera','wp-content-copy-protector'); ?></font></li>
+			<li><font style="font-size: 10pt" face="Tahoma"><?php _e('Disables image drag and drop function','wp-content-copy-protector'); ?></font></li>
+			<li><font style="font-size: 10pt" face="Tahoma"><?php _e('Works on smart phones.','wp-content-copy-protector'); ?></font></li>
+			<li><font style="font-size: 10pt" face="Tahoma"><?php _e('Ability to set varying levels of protection per page or post.','wp-content-copy-protector'); ?></font></li>
 		</ul>
+		<p><a href="https://www.wp-buy.com/wpccp-subscribe">Subscribe</a> to our mailing list to get flash discounts</p>
 		</div>
+	<div class="simpleTabsContent" id="a55">
+	<h4><?php _e('Other products:','wp-content-copy-protector'); ?></h4>
+		<div id="other-products">
+			<?php
+			$before_url = '';
+			if(is_multisite()) $before_url = "network/";
+			?>
+			<a href="<?php echo $before_url ?>plugin-install.php?s=wp-buy+codepressplugins++WP+Maintenance+Mode+Site+Under+Construction&tab=search&type=term">
+				<img class="size-full" border="1" src="<?php echo $pluginsurl ?>/images/other-products/1.gif" style="margin: 10px">
+			</a>
+			<a href="<?php echo $before_url ?>plugin-install.php?s=Post+List+Creator&tab=search&type=tag">
+				<img class="size-full" border="1" src="<?php echo $pluginsurl ?>/images/other-products/2.gif" style="margin: 10px">
+			</a>
+			<a href="<?php echo $before_url ?>plugin-install.php?s=wp-buy+Captchinoo&tab=search&type=term">
+				<img class="size-full" border="1" src="<?php echo $pluginsurl ?>/images/other-products/3.gif" style="margin: 10px">
+			</a>
+			<a href="<?php echo $before_url ?>plugin-install.php?s=wp-buy+Login+LockDown+–+Limit+Failed+Login+Attempts&tab=search&type=term">
+				<img class="size-full" border="1" src="<?php echo $pluginsurl ?>/images/other-products/4.gif" style="margin: 10px">
+			</a>
+			<style>
+				#other-products a,#other-products a:active,#other-products a:focus{
+					color: #fff;
+				}
+			</style>
+	</div>
 </div><!-- simple tabs div end -->
-<p align="right"><input class="btn btn-success" type="submit" value="   Save Settings   " name="B4" style="width: 193; height: 29;">&nbsp;&nbsp;</p>
+<p align="right"><input class="btn btn-success" type="submit" value="   <?php _e('Save Settings','wp-content-copy-protector'); ?>   " name="B4" style="width: 193; height: 29;">&nbsp;&nbsp;</p>
 </form>
 </div>
+

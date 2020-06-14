@@ -2,8 +2,8 @@
 Contributors: wp-buy	
 Donate link: http://goo.gl/UJVpbi
 Tags: content, content copy protection, content protection, copy protection, prevent copy, protect blog, image protect, image protection, no right click, plagiarism, secure content, content theft
-Requires at least: 2.5
-Tested up to: 5.3
+Requires at least: 3.5
+Tested up to: 5.4
 Stable tag: trunk
 
 This wp plugin protect the posts content from being copied by any other web site author (content copy protection) , you dont want your content to spread without your permission!!
@@ -64,8 +64,36 @@ your posts extremely simple without yelling at your readers</li>
 </ul>
 
 == Changelog ==
+= 2.3 =
+<ul>
+<li>Copy paste password to log in fields and any other text field is now possible</li>
+<li>Some script fixes</li>
+<li>Admin page Fix (mailing list join message will show your email before submit)</li>
+<li>Admin page Fix (Our other products list is ready to go)</li>
+</ul>
+= 2.2 =
+<ul>
+<li>Admin page Fix</li>
+</ul>
+= 2.1 =
+<ul>
+<li>Fix iphone & ipad posts protection</li>
+<li>Premium feature unlocked!! the second option inside CSS protection tab</li>
+<li>"Review us" admin dismissable notice added</li>
+</ul>
+= 1.9 =
+<ul>
+<li>Translation slug is now the same as the plugin slug</li>
+<li>Arabic translation file included inside the plugin language folder and its also included on wordpress translation plugin page</li>
+</ul>
+= 1.8 =
+<ul>
+<li>Translation is now supported</li>
+<li>wp-content-copy-protector.pot Template translation file included</li>
+</ul>	
 = 1.7.3 =
 <ul>
+<li>Checking with the last update</li>
 <li>Unwanted ad removed</li>
 </ul>	
 = 1.7.2 =

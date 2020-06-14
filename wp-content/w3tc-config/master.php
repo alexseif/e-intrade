@@ -1,5 +1,5 @@
 <?php exit; ?>{
-    "version": "0.10.1",
+    "version": "0.13.3",
     "cluster.messagebus.debug": false,
     "cluster.messagebus.enabled": false,
     "cluster.messagebus.sns.region": "",
@@ -8,6 +8,7 @@
     "cluster.messagebus.sns.topic_arn": "",
     "dbcache.configuration_overloaded": false,
     "dbcache.debug": "0",
+    "dbcache.debug_purge": false,
     "dbcache.enabled": "1",
     "dbcache.engine": "file",
     "dbcache.file.gc": "3600",
@@ -20,6 +21,7 @@
     ],
     "dbcache.memcached.username": "",
     "dbcache.memcached.password": "",
+    "dbcache.memcached.binary_protocol": true,
     "dbcache.redis.persistent": true,
     "dbcache.redis.servers": [
         "127.0.0.1:6379"
@@ -59,9 +61,38 @@
         "\\bfound_rows\\(\\)",
         "\\bw3tc_request_data\\b"
     ],
+    "lazyload.enabled": false,
+    "lazyload.process_img": true,
+    "lazyload.process_background": true,
+    "lazyload.exclude": [
+        "avia-bg-style-fixed",
+        "data-bgposition=",
+        "data-envira-src=",
+        "data-large_image=",
+        "data-lazy-original=",
+        "data-lazy-src=",
+        "data-lazyload=",
+        "data-lazysrc=",
+        "data-no-lazy=",
+        "data-src=",
+        "data-srcset=",
+        "fullurl=",
+        "lazy-slider-img=",
+        "loading=\"eager\"",
+        "no-lazy",
+        "rev-slidebg",
+        "soliloquy-image",
+        "swatch-img",
+        "w3-total-cache",
+        "woocommerce\/assets\/images\/placeholder.png",
+        "wpcf7_captcha",
+        "skip_lazy"
+    ],
+    "lazyload.embed_method": "async_head",
     "objectcache.configuration_overloaded": false,
     "objectcache.enabled": "0",
     "objectcache.debug": "0",
+    "objectcache.debug_purge": false,
     "objectcache.enabled_for_wp_admin": true,
     "objectcache.fallback_transients": true,
     "objectcache.engine": "file",
@@ -74,6 +105,7 @@
     "objectcache.memcached.aws_autodiscovery": false,
     "objectcache.memcached.username": "",
     "objectcache.memcached.password": "",
+    "objectcache.memcached.binary_protocol": true,
     "objectcache.redis.persistent": true,
     "objectcache.redis.servers": [
         "127.0.0.1:6379"
@@ -104,6 +136,7 @@
     "pgcache.enabled": "1",
     "pgcache.comment_cookie_ttl": "1800",
     "pgcache.debug": "0",
+    "pgcache.debug_purge": false,
     "pgcache.engine": "file_generic",
     "pgcache.file.gc": "3600",
     "pgcache.file.nfs": false,
@@ -116,6 +149,7 @@
     "pgcache.memcached.aws_autodiscovery": false,
     "pgcache.memcached.username": "",
     "pgcache.memcached.password": "",
+    "pgcache.memcached.binary_protocol": true,
     "pgcache.redis.persistent": true,
     "pgcache.redis.servers": [
         "127.0.0.1:6379"
@@ -261,6 +295,7 @@
     "minify.memcached.aws_autodiscovery": false,
     "minify.memcached.username": "",
     "minify.memcached.password": "",
+    "minify.memcached.binary_protocol": true,
     "minify.redis.persistent": true,
     "minify.redis.servers": [
         "127.0.0.1:6379"
@@ -595,6 +630,8 @@
     "browsercache.security.csp.frame.ancestors": "",
     "browsercache.security.csp.sandbox": "",
     "browsercache.security.csp.default": "",
+    "browsercache.security.fp": false,
+    "browsercache.security.fp.values": [],
     "mobile.configuration_overloaded": false,
     "mobile.enabled": false,
     "mobile.rgroups": {
@@ -783,7 +820,6 @@
             ]
         }
     },
-    "common.support": "",
     "common.track_usage": "1",
     "common.tweeted": false,
     "config.check": "1",
@@ -816,8 +852,10 @@
         "wordpress-seo": "*",
         "cloudflare": "*"
     },
+    "extensions.active_dropin": [],
     "plugin.license_key": "",
     "plugin.type": "",
+    "common.support": "",
     "timelimit.cdn_container_create": 300,
     "cdn.netdna.alias": "",
     "cdn.netdna.consumerkey": "",
