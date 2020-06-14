@@ -3315,8 +3315,71 @@ if ( ! function_exists( 'woocommerce_photoswipe' ) ) {
  * @since  3.0.0
  * @param  WC_Product $product Product Object.
  */
-function wc_display_product_attributes( $product ) {
-	$product_attributes = array();
+function wc_display_product_attributes($product)
+{
+  $locale = get_locale();
+  if (strpos($locale, "_") !== false) {
+    $locale = explode('_', $locale)[0];
+  }
+
+  $product_attributes_labels = [
+    'en' => [
+      'Country of origin' => 'Country of origin',
+      'Packing' => 'Packing',
+      'Season' => 'Season',
+      'Variety' => 'Variety'
+    ],
+    'ar' => [
+      'Country of origin' => 'بلد النشأ',
+      'Packing' => 'انواع التغليف ',
+      'Season' => 'فصل',
+      'Variety' => 'نوع'
+    ],
+    'fr' => [
+      'Country of origin' => 'Pay de origine',
+      'Packing' => 'Type d\'emballage',
+      'Season' => 'Saison',
+      'Variety' => 'Saison'
+    ],
+    'el' => [
+      'Country of origin' => 'Χώρα προέλευσης',
+      'Packing' => 'Τύποι συσκευασίας',
+      'Season' => 'Εποχή',
+      'Variety' => 'Ποικιλία'
+    ],
+    'it' => [
+      'Country of origin' => 'Paese d\'origine',
+      'Packing' => 'Tipo di impacchettamento',
+      'Season' => 'Stagione',
+      'Variety' => 'Varietà'
+    ],
+    'ru' => [
+      'Country of origin' => 'Страна происхождения',
+      'Packing' => 'Тип упаковки',
+      'Season' => 'Сезон',
+      'Variety' => 'выбор'
+    ],
+    'pl' => [
+      'Country of origin' => 'Kraj pochodzenia',
+      'Packing' => 'Rodzaj opakowania',
+      'Season' => 'Pora roku',
+      'Variety' => 'Różnorodność'
+    ],
+    'de' => [
+      'Country of origin' => 'Herkunftsland',
+      'Packing' => 'Art der Verpackung ',
+      'Season' => 'Saison',
+      'Variety' => 'Vielfalt'
+    ],
+    'es' => [
+      'Country of origin' => 'País de origen',
+      'Packing' => 'Tipo de embalaje',
+      'Season' => 'Temporada',
+      'Variety' => 'Variedad'
+    ]
+  ];
+
+  $product_attributes = array();
 
 	// Display weight and dimensions before attribute list.
 	$display_dimensions = apply_filters( 'wc_product_enable_dimensions_display', $product->has_weight() || $product->has_dimensions() );
@@ -3357,16 +3420,17 @@ function wc_display_product_attributes( $product ) {
 		} else {
 			$values = $attribute->get_options();
 
-			foreach ( $values as &$value ) {
-				$value = make_clickable( esc_html( $value ) );
-			}
-		}
+      foreach ($values as &$value) {
+        $value = make_clickable(esc_html($value));
+      }
+    }
+    $attribute_label = $product_attributes_labels[$locale][wc_attribute_label($attribute->get_name())];
 
-		$product_attributes[ 'attribute_' . sanitize_title_with_dashes( $attribute->get_name() ) ] = array(
-			'label' => wc_attribute_label( $attribute->get_name() ),
-			'value' => apply_filters( 'woocommerce_attribute', wpautop( wptexturize( implode( ', ', $values ) ) ), $attribute, $values ),
-		);
-	}
+    $product_attributes['attribute_' . sanitize_title_with_dashes($attribute->get_name())] = array(
+      'label' => $attribute_label,
+      'value' => apply_filters('woocommerce_attribute', wpautop(wptexturize(implode(', ', $values))), $attribute, $values),
+    );
+  }
 
 	/**
 	 * Hook: woocommerce_display_product_attributes.
